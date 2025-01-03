@@ -1,0 +1,782 @@
+[
+  {
+    "ID": "ACL",
+    "Agency": "Administration for Community Living"
+  },
+  {
+    "ID": "ACF",
+    "Agency": "Administration of Children and Families"
+  },
+  {
+    "ID": "AOA",
+    "Agency": "Administration on Aging"
+  },
+  {
+    "ID": "AHRQ",
+    "Agency": "Agency for Healthcare Research and Quality"
+  },
+  {
+    "ID": "ATSDR",
+    "Agency": "Agency for Toxic Substances and Disease Registry"
+  },
+  {
+    "ID": "AMS",
+    "Agency": "Agricultural Marketing Service"
+  },
+  {
+    "ID": "ARS",
+    "Agency": "Agricultural Research Service"
+  },
+  {
+    "ID": "USAF",
+    "Agency": "Air Force Department"
+  },
+  {
+    "ID": "TTB",
+    "Agency": "Alcohol and Tobacco Tax and Trade Bureau"
+  },
+  {
+    "ID": "ATF",
+    "Agency": "Alcohol, Tobacco, Firearms, and Explosives Bureau"
+  },
+  {
+    "ID": "APHIS",
+    "Agency": "Animal and Plant Health Inspection Service"
+  },
+  {
+    "ID": "ATR",
+    "Agency": "Antitrust Division"
+  },
+  {
+    "ID": "ASC",
+    "Agency": "Appraisal Subcommittee"
+  },
+  {
+    "ID": "ATBCB",
+    "Agency": "Architectural and Transportation Barriers Compliance Board"
+  },
+  {
+    "ID": "USA",
+    "Agency": "Army Department"
+  },
+  {
+    "ID": "BPA",
+    "Agency": "Bonneville Power Administration"
+  },
+  {
+    "ID": "EAB",
+    "Agency": "Bureau of Economic Analysis"
+  },
+  {
+    "ID": "BIA",
+    "Agency": "Bureau of Indian Affairs"
+  },
+  {
+    "ID": "BIS",
+    "Agency": "Bureau of Industry and Security"
+  },
+  {
+    "ID": "BLS",
+    "Agency": "Bureau of Labor Statistics"
+  },
+  {
+    "ID": "BLM",
+    "Agency": "Bureau of Land Management"
+  },
+  {
+    "ID": "BOEM",
+    "Agency": "Bureau of Ocean Energy Management"
+  },
+  {
+    "ID": "BPD",
+    "Agency": "Bureau of Public Debt"
+  },
+  {
+    "ID": "BOR",
+    "Agency": "Bureau of Reclamation"
+  },
+  {
+    "ID": "BSEE",
+    "Agency": "Bureau of Safety and Environmental Enforcement"
+  },
+  {
+    "ID": "USBC",
+    "Agency": "Bureau of the Census"
+  },
+  {
+    "ID": "BSC",
+    "Agency": "Business Standards Council"
+  },
+  {
+    "ID": "CDC",
+    "Agency": "Centers for Disease Control and Prevention"
+  },
+  {
+    "ID": "CMS",
+    "Agency": "Centers for Medicare&Medicaid Services"
+  },
+  {
+    "ID": "CSB",
+    "Agency": "Chemical Safety and Hazard Investigation Board"
+  },
+  {
+    "ID": "CSEO",
+    "Agency": "Child Support Enforcement Office"
+  },
+  {
+    "ID": "USCG",
+    "Agency": "Coast Guard"
+  },
+  {
+    "ID": "CPPBSD",
+    "Agency": "Committee for Purchase From People Who Are Blind Or Severely Disabled"
+  },
+  {
+    "ID": "CCC",
+    "Agency": "Commodity Credit Corporation"
+  },
+  {
+    "ID": "CDFI",
+    "Agency": "Community Development Financial Institutions Fund"
+  },
+  {
+    "ID": "OCC",
+    "Agency": "Comptroller of the Currency"
+  },
+  {
+    "ID": "CFPB",
+    "Agency": "Consumer Financial Protection Bureau"
+  },
+  {
+    "ID": "CPSC",
+    "Agency": "Consumer Product Safety Commission"
+  },
+  {
+    "ID": "CSREES",
+    "Agency": "Cooperative State Research, Education, and Extension Service"
+  },
+  {
+    "ID": "CNCS",
+    "Agency": "Corporation for National and Community Service"
+  },
+  {
+    "ID": "COE",
+    "Agency": "Corps of Engineers"
+  },
+  {
+    "ID": "CEQ",
+    "Agency": "Council on Environmental Quality"
+  },
+  {
+    "ID": "USCBP",
+    "Agency": "Customs and Border Protection Bureau"
+  },
+  {
+    "ID": "CISA",
+    "Agency": "Cybersecurity and Infrastructure Security Agency"
+  },
+  {
+    "ID": "DARS",
+    "Agency": "Defense Acquisition Regulations System"
+  },
+  {
+    "ID": "USDA",
+    "Agency": "Department of Agriculture"
+  },
+  {
+    "ID": "DOC",
+    "Agency": "Department of Commerce"
+  },
+  {
+    "ID": "DOD",
+    "Agency": "Department of Defense"
+  },
+  {
+    "ID": "ED",
+    "Agency": "Department of Education"
+  },
+  {
+    "ID": "DOE",
+    "Agency": "Department of Energy"
+  },
+  {
+    "ID": "HHS",
+    "Agency": "Department of Health and Human Services"
+  },
+  {
+    "ID": "DHS",
+    "Agency": "Department of Homeland Security"
+  },
+  {
+    "ID": "HUD",
+    "Agency": "Department of Housing and Urban Development"
+  },
+  {
+    "ID": "DOJ",
+    "Agency": "Department of Justice"
+  },
+  {
+    "ID": "DOL",
+    "Agency": "Department of Labor"
+  },
+  {
+    "ID": "DOI",
+    "Agency": "Department of the Interior"
+  },
+  {
+    "ID": "TREAS",
+    "Agency": "Department of the Treasury"
+  },
+  {
+    "ID": "DOT",
+    "Agency": "Department of Transportation"
+  },
+  {
+    "ID": "VA",
+    "Agency": "Department of Veterans Affairs"
+  },
+  {
+    "ID": "DEPO",
+    "Agency": "Disability Employment Policy Office"
+  },
+  {
+    "ID": "DEA",
+    "Agency": "Drug Enforcement Administration"
+  },
+  {
+    "ID": "EDA",
+    "Agency": "Economic Development Administration"
+  },
+  {
+    "ID": "ERS",
+    "Agency": "Economic Research Service"
+  },
+  {
+    "ID": "ECSA",
+    "Agency": "Economics and Statistics Administration"
+  },
+  {
+    "ID": "EAC",
+    "Agency": "Election Assistance Commission"
+  },
+  {
+    "ID": "EBSA",
+    "Agency": "Employee Benefits Security Administration"
+  },
+  {
+    "ID": "ECAB",
+    "Agency": "Employees' Compensation Appeals Board"
+  },
+  {
+    "ID": "ETA",
+    "Agency": "Employment and Training Administration"
+  },
+  {
+    "ID": "ESA",
+    "Agency": "Employment Standards Administration"
+  },
+  {
+    "ID": "EERE",
+    "Agency": "Energy Efficiency and Renewable Energy Office"
+  },
+  {
+    "ID": "EIA",
+    "Agency": "Energy Information Administration"
+  },
+  {
+    "ID": "EOA",
+    "Agency": "Energy Office, Agriculture Department"
+  },
+  {
+    "ID": "EPA",
+    "Agency": "Environmental Protection Agency"
+  },
+  {
+    "ID": "EEOC",
+    "Agency": "Equal Employment Opportunity Commission"
+  },
+  {
+    "ID": "EOIR",
+    "Agency": "Executive Office for Immigration Review"
+  },
+  {
+    "ID": "EIB",
+    "Agency": "Export Import Bank of the United States"
+  },
+  {
+    "ID": "FPAC",
+    "Agency": "Farm Production and Conservation Business Center"
+  },
+  {
+    "ID": "FSA",
+    "Agency": "Farm Service Agency"
+  },
+  {
+    "ID": "FAR",
+    "Agency": "Federal Acquisition Regulation"
+  },
+  {
+    "ID": "FAA",
+    "Agency": "Federal Aviation Administration"
+  },
+  {
+    "ID": "FBI",
+    "Agency": "Federal Bureau of Investigation"
+  },
+  {
+    "ID": "FCIC",
+    "Agency": "Federal Crop Insurance Corporation"
+  },
+  {
+    "ID": "FEMA",
+    "Agency": "Federal Emergency Management Agency"
+  },
+  {
+    "ID": "FFIEC",
+    "Agency": "Federal Financial Institutions Examination Council"
+  },
+  {
+    "ID": "FHWA",
+    "Agency": "Federal Highway Administration"
+  },
+  {
+    "ID": "FLETC",
+    "Agency": "Federal Law Enforcement Training Center"
+  },
+  {
+    "ID": "FMC",
+    "Agency": "Federal Maritime Commission"
+  },
+  {
+    "ID": "FMCSA",
+    "Agency": "Federal Motor Carrier Safety Administration"
+  },
+  {
+    "ID": "BOP",
+    "Agency": "Federal Prisons Bureau"
+  },
+  {
+    "ID": "FRA",
+    "Agency": "Federal Railroad Administration"
+  },
+  {
+    "ID": "FRTIB",
+    "Agency": "Federal Retirement Thrift Investment Board"
+  },
+  {
+    "ID": "FTC",
+    "Agency": "Federal Trade Commission"
+  },
+  {
+    "ID": "FTA",
+    "Agency": "Federal Transit Administration"
+  },
+  {
+    "ID": "FINCEN",
+    "Agency": "Financial Crimes Enforcement Network"
+  },
+  {
+    "ID": "FSOC",
+    "Agency": "Financial Stability Oversight Council"
+  },
+  {
+    "ID": "FIRSTNET",
+    "Agency": "First Responder Network Authority"
+  },
+  {
+    "ID": "FISCAL",
+    "Agency": "Fiscal Service"
+  },
+  {
+    "ID": "FWS",
+    "Agency": "Fish and Wildlife Service"
+  },
+  {
+    "ID": "FDA",
+    "Agency": "Food and Drug Administration"
+  },
+  {
+    "ID": "FNS",
+    "Agency": "Food and Nutrition Service"
+  },
+  {
+    "ID": "FSIS",
+    "Agency": "Food Safety and Inspection Service"
+  },
+  {
+    "ID": "FAS",
+    "Agency": "Foreign Agricultural Service"
+  },
+  {
+    "ID": "FCSC",
+    "Agency": "Foreign Claims Settlement Commission"
+  },
+  {
+    "ID": "FTZB",
+    "Agency": "Foreign-trade Zones Board"
+  },
+  {
+    "ID": "FS",
+    "Agency": "Forest Service"
+  },
+  {
+    "ID": "GSA",
+    "Agency": "General Services Administration"
+  },
+  {
+    "ID": "GIPSA",
+    "Agency": "Grain Inspection, Packers and Stockyards Administration"
+  },
+  {
+    "ID": "GAPFAC",
+    "Agency": "Gsa Acquisition Policy Federal Advisory Committee"
+  },
+  {
+    "ID": "HRSA",
+    "Agency": "Health Resources and Services Administration"
+  },
+  {
+    "ID": "ICEB",
+    "Agency": "Immigration and Customs Enforcement Bureau"
+  },
+  {
+    "ID": "IACB",
+    "Agency": "Indian Arts and Crafts Board"
+  },
+  {
+    "ID": "IHS",
+    "Agency": "Indian Health Service"
+  },
+  {
+    "ID": "ISOO",
+    "Agency": "Information Security Oversight Office"
+  },
+  {
+    "ID": "USDAIG",
+    "Agency": "Inspector General Office, Agriculture Department"
+  },
+  {
+    "ID": "HHSIG",
+    "Agency": "Inspector General Office, Health and Human Services Department"
+  },
+  {
+    "ID": "IRS",
+    "Agency": "Internal Revenue Service"
+  },
+  {
+    "ID": "ITA",
+    "Agency": "International Trade Administration"
+  },
+  {
+    "ID": "OJP",
+    "Agency": "Justice Programs Office"
+  },
+  {
+    "ID": "OJJDP",
+    "Agency": "Juvenile Justice and Delinquency Prevention Office"
+  },
+  {
+    "ID": "LMSO",
+    "Agency": "Labor-management Standards Office"
+  },
+  {
+    "ID": "MARAD",
+    "Agency": "Maritime Administration"
+  },
+  {
+    "ID": "MSHA",
+    "Agency": "Mine Safety and Health Administration"
+  },
+  {
+    "ID": "MMS",
+    "Agency": "Minerals Management Service"
+  },
+  {
+    "ID": "MBDA",
+    "Agency": "Minority Business Development Agency"
+  },
+  {
+    "ID": "NASA",
+    "Agency": "National Aeronautics and Space Administration"
+  },
+  {
+    "ID": "NAL",
+    "Agency": "National Agricultural Library"
+  },
+  {
+    "ID": "NASS",
+    "Agency": "National Agricultural Statistics Service"
+  },
+  {
+    "ID": "NARA",
+    "Agency": "National Archives and Records Administration"
+  },
+  {
+    "ID": "NCS",
+    "Agency": "National Communications System"
+  },
+  {
+    "ID": "NCUA",
+    "Agency": "National Credit Union Administration"
+  },
+  {
+    "ID": "NHTSA",
+    "Agency": "National Highway Traffic Safety Administration"
+  },
+  {
+    "ID": "NIGC",
+    "Agency": "National Indian Gaming Commission"
+  },
+  {
+    "ID": "NIC",
+    "Agency": "National Institute of Corrections"
+  },
+  {
+    "ID": "NIFA",
+    "Agency": "National Institute of Food and Agriculture"
+  },
+  {
+    "ID": "NIST",
+    "Agency": "National Institute of Standards and Technology"
+  },
+  {
+    "ID": "NIH",
+    "Agency": "National Institutes of Health"
+  },
+  {
+    "ID": "NLRB",
+    "Agency": "National Labor Relations Board"
+  },
+  {
+    "ID": "NNSA",
+    "Agency": "National Nuclear Security Administration"
+  },
+  {
+    "ID": "NOAA",
+    "Agency": "National Oceanic and Atmospheric Administration"
+  },
+  {
+    "ID": "NPS",
+    "Agency": "National Park Service"
+  },
+  {
+    "ID": "NSF",
+    "Agency": "National Science Foundation"
+  },
+  {
+    "ID": "NSPC",
+    "Agency": "National Space Council"
+  },
+  {
+    "ID": "NTIA",
+    "Agency": "National Telecommunications and Information Administration"
+  },
+  {
+    "ID": "NTSB",
+    "Agency": "National Transportation Safety Board"
+  },
+  {
+    "ID": "NRCS",
+    "Agency": "Natural Resources Conservation Service"
+  },
+  {
+    "ID": "USN",
+    "Agency": "Navy Department"
+  },
+  {
+    "ID": "NEO",
+    "Agency": "Nuclear Energy Office"
+  },
+  {
+    "ID": "NRC",
+    "Agency": "Nuclear Regulatory Commission"
+  },
+  {
+    "ID": "OSHA",
+    "Agency": "Occupational Safety and Health Administration"
+  },
+  {
+    "ID": "OEPNU",
+    "Agency": "Office of Energy Policy and New Uses"
+  },
+  {
+    "ID": "OFCCP",
+    "Agency": "Office of Federal Contract Compliance Programs"
+  },
+  {
+    "ID": "OFPP",
+    "Agency": "Office of Federal Procurement Policy"
+  },
+  {
+    "ID": "OFAC",
+    "Agency": "Office of Foreign Assets Control"
+  },
+  {
+    "ID": "OMB",
+    "Agency": "Office of Management and Budget"
+  },
+  {
+    "ID": "ONDCP",
+    "Agency": "Office of National Drug Control Policy"
+  },
+  {
+    "ID": "ONRR",
+    "Agency": "Office of Natural Resources Revenue"
+  },
+  {
+    "ID": "OPM",
+    "Agency": "Office of Personnel Management"
+  },
+  {
+    "ID": "OPPM",
+    "Agency": "Office of Procurement and Property Management"
+  },
+  {
+    "ID": "OSTP",
+    "Agency": "Office of Science and Technology Policy"
+  },
+  {
+    "ID": "OSM",
+    "Agency": "Office of Surface Mining Reclamation and Enforcement"
+  },
+  {
+    "ID": "OFR",
+    "Agency": "Office of the Federal Register"
+  },
+  {
+    "ID": "IPEC",
+    "Agency": "Office of the Intellectual Property Enforcement Coordinator"
+  },
+  {
+    "ID": "ONCD",
+    "Agency": "Office of the National Cyber Director"
+  },
+  {
+    "ID": "OTS",
+    "Agency": "Office of Thrift Supervision"
+  },
+  {
+    "ID": "USTR",
+    "Agency": "Office of United States Trade Representative"
+  },
+  {
+    "ID": "USPC",
+    "Agency": "Parole Commission"
+  },
+  {
+    "ID": "PTO",
+    "Agency": "Patent and Trademark Office"
+  },
+  {
+    "ID": "PBGC",
+    "Agency": "Pension Benefit Guaranty Corporation"
+  },
+  {
+    "ID": "PHMSA",
+    "Agency": "Pipeline and Hazardous Materials Safety Administration"
+  },
+  {
+    "ID": "PCLOB",
+    "Agency": "Privacy and Civil Liberties Oversight Board"
+  },
+  {
+    "ID": "RITA",
+    "Agency": "Research and Innovative Technology Administration"
+  },
+  {
+    "ID": "RMA",
+    "Agency": "Risk Management Agency"
+  },
+  {
+    "ID": "RBS",
+    "Agency": "Rural Business-Cooperative Service"
+  },
+  {
+    "ID": "RHS",
+    "Agency": "Rural Housing Service"
+  },
+  {
+    "ID": "RTB",
+    "Agency": "Rural Telephone Bank"
+  },
+  {
+    "ID": "RUS",
+    "Agency": "Rural Utilities Service"
+  },
+  {
+    "ID": "SLSDC",
+    "Agency": "Saint Lawrence Seaway Development Corporation"
+  },
+  {
+    "ID": "SBA",
+    "Agency": "Small Business Administration"
+  },
+  {
+    "ID": "SSA",
+    "Agency": "Social Security Administration"
+  },
+  {
+    "ID": "SEPA",
+    "Agency": "Southeastern Power Administration"
+  },
+  {
+    "ID": "SWPA",
+    "Agency": "Southwestern Power Administration"
+  },
+  {
+    "ID": "SAMHSA",
+    "Agency": "Substance Abuse and Mental Health Services Administration"
+  },
+  {
+    "ID": "TA",
+    "Agency": "Technology Administration"
+  },
+  {
+    "ID": "TSA",
+    "Agency": "Transportation Security Administration"
+  },
+  {
+    "ID": "USGS",
+    "Agency": "U. S. Geological Survey"
+  },
+  {
+    "ID": "AID",
+    "Agency": "U.S. Agency for International Development"
+  },
+  {
+    "ID": "USCIS",
+    "Agency": "U.S. Citizenship and Immigration Services"
+  },
+  {
+    "ID": "COLC",
+    "Agency": "U.S. Copyright Office"
+  },
+  {
+    "ID": "DOS",
+    "Agency": "U.S. Department of State"
+  },
+  {
+    "ID": "USC",
+    "Agency": "United States Courts"
+  },
+  {
+    "ID": "USMINT",
+    "Agency": "United States Mint"
+  },
+  {
+    "ID": "VETS",
+    "Agency": "Veterans Employment and Training Service"
+  },
+  {
+    "ID": "WHD",
+    "Agency": "Wage and Hour Division"
+  },
+  {
+    "ID": "WAPA",
+    "Agency": "Western Area Power Administration"
+  },
+  {
+    "ID": "WCPO",
+    "Agency": "Workers Compensation Programs Office"
+  }
+]

@@ -1,0 +1,11 @@
+# Utilities
+requests
+python-dotenv
+
+# AI 
+openai
+#  swarm
+
+# UI 
+streamlit
+  
