@@ -24,14 +24,14 @@ Searches for documents on Regulations.gov based on the provided criteria. This t
 
 ### Output
 #### Data
-- `documentId` (str): The unique ID of the document.
-- `title` (str): The title of the document.
+- `documentId` (str, sortable): The unique ID of the document.
+- `title` (str, sortable): The title of the document.
 - `documentType` (str): The type of the document (e.g., "Proposed Rule", "Rule").
-- `postedDate` (str): The date the document was posted (format: `YYYY-MM-DD`).
-- `lastModifiedDate` (str): The date the document was last modified (format: `YYYY-MM-DD`).
+- `postedDate` (str, sortable): The date the document was posted (format: `YYYY-MM-DD`).
+- `lastModifiedDate` (str, sortable): The date the document was last modified (format: `YYYY-MM-DD`).
 - `docketId` (str): The ID of the docket the document belongs to.
 - `agencyId` (str): The ID of the agency that posted the document.
-- `commentEndDate` (str): The end date of the comment period (if applicable).
+- `commentEndDate` (str, sortable): The end date of the comment period (if applicable).
 - `subtype` (str): The subtype of the document (if available).
 
 #### Metadata

@@ -2,20 +2,18 @@
 rga_wrapper.py
 
 A Python wrapper for the Regulations.gov API (v4). This wrapper provides methods to interact with the API endpoints
-for documents, comments, dockets, and comment submissions. It includes robust error handling, logging, and clear
-documentation for ease of use by developers of all levels.
-
-Author: [Your Name]
-Date: [Date]
+for documents, comments, and dockets. It includes robust error handling, logging, and clear documentation for 
+ease of use by developers of all levels.
 """
 
+# Import necessary libraries
 import logging
 import requests
 from typing import Optional, Dict, Any
 
+
 # Create a module-specific logger
 logger = logging.getLogger(__name__)
-
 
 class RegulationsGovAPI:
     """
@@ -99,7 +97,8 @@ class RegulationsGovAPI:
         Retrieves a list of documents based on the provided filters.
 
         For detailed information about the input parameters and usage examples,
-        refer to the documentation in `docs/tools/get_documents.md`.
+        refer to the documentation in `docs/tools/get_documents.md` or the  official
+        Regulations.gov API documentation at https://open.gsa.gov/api/regulationsgov/.
 
         Returns:
             Any: The JSON response from the API.
@@ -138,26 +137,9 @@ class RegulationsGovAPI:
             params["filter[withinCommentPeriod]"] = str(withinCommentPeriod).lower()
         if sort:
             params["sort"] = sort
-
-        # Convert pageNumber and pageSize to integers
-        try:
-            pageNumber = int(pageNumber)
-            pageSize = int(pageSize)
-        except ValueError:
-            raise ValueError("pageNumber and pageSize must be integers")
-
-        # Make sure pageNumber and pageSize are within the allowed range
-        if not 1 <= pageNumber <= 20:
-            raise ValueError("pageNumber must be between 1 and 20")
-        if pageSize < 5:
-            pageSize = 5
-        elif pageSize > 250:
-            pageSize = 250
-
         # Add pagination parameters
         params["page[number]"] = pageNumber
         params["page[size]"] = pageSize
-
 
         logger.info("Fetching documents with parameters: %s", params)
         response = requests.get(url, headers=self.headers, params=params)

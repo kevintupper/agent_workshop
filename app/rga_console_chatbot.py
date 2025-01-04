@@ -26,23 +26,29 @@
 
 import os
 import sys
+import dotenv
+from datetime import datetime
 
 # Add the parent directory of 'app' and 'swarm' to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# Import for SWARM (adjusted to use AzureOpenAI)
-from swarm import Agent
-from swarm.repl import run_demo_loop
+# Import for Azure OpenAI
+from openai import AzureOpenAI
 
-# Tools for the agent to use
+# Import for SWARM 
+from swarm import Swarm, Agent
+from swarm.repl.repl import process_and_print_streaming_response, pretty_print_messages
+
+# Import tools for the agents to use
 from rga_tools import (
     get_documents,
     get_document_details,
-    get_current_date,
     get_agency_id,
     get_pdf_content,
 )
 
+# Get Current Date for temporal context when filtering by date
+current_date = datetime.now().strftime("%Y-%m-%d")
 
 ##########################################################################################
 # Create our SWARM Agent
@@ -59,8 +65,6 @@ with open('docs/tools/get_documents.md', 'r') as file:
 with open('docs/tools/get_document_details.md', 'r') as file:
     get_document_details_instructions = file.read()
 
-with open('docs/tools/get_current_date.md', 'r') as file:
-    get_current_date_instructions = file.read()
 
 with open('docs/tools/get_agency_id.md', 'r') as file:
     get_agency_id_instructions = file.read()
@@ -81,21 +85,16 @@ You are a helpful agent that can search and retrieve information from the Regula
    - Example: "I apologize, but my expertise is in Regulations.gov and related topics."
 3. **Clarify Ambiguity**: If the user's query is unclear, ask follow-up questions to better understand their intent.
 
-### Handling Document Content:
-1. If the user asks for specific details that are likely contained in a document's content (e.g., names, descriptions, or other specific information), follow these steps:
-   - Use the `get_document_details` tool to retrieve the document metadata and check for any attachments (e.g., a PDF).
-   - If a PDF attachment is available, use the `get_pdf_content` tool to retrieve and process the content.
-   - Extract the relevant information from the PDF content and provide a clear, concise response to the user.
-2. If the document does not have a PDF attachment or the content is not relevant to the user's query, provide the metadata details instead.
-3. **Avoid including raw API links in responses**.
-4. **Avoid responses like this:  You can find more details about this document by searching for its title or Document ID on [Regulations.gov](https://www.regulations.gov).**
-
-
 ### Handling Date Parameters:
 When the user asks for information that requires filtering by date (e.g., "Show me documents from the last 30 days"), follow these steps:
-1. Use the `get_current_date` tool to retrieve the current date.
-2. Use the current date to calculate the appropriate date range for filtering.
-3. Pass the calculated date range as parameters to the relevant Regulations.gov tools.
+1. **Always use {current_date} as the current date when you need to calculate date ranges or offsets. 
+2. **Calculate Date Ranges**: If the user specifies a relative date range (e.g., "last 30 days", "last year"), calculate the exact start and end dates using {current_date} as your point of reference for today.
+   - Example: For "last 30 days", subtract 30 days from {current_date} to get the start date and use {current_date} as the end date.
+   - Example: For "last year", calculate the start date as January 1 of the previous year and the end date as December 31 of the previous year.
+3. **Pass the Calculated Dates to Tools**: Use the calculated start and end dates as parameters for tools like `get_documents`.
+   - Example: Use `postedDateGe` for the start date and `postedDateLe` for the end date.
+4. **Provide Clear Responses**: When responding to the user, clearly state the date range you used for filtering.
+   - Example: "Here are the documents posted between 2023-09-15 and 2023-10-15."
 
 ### Available Tools:
 You have access to the following tools to assist with user queries. Use them as needed to retrieve information or perform tasks.
@@ -103,8 +102,6 @@ You have access to the following tools to assist with user queries. Use them as 
 {get_documents_instructions}
 
 {get_document_details_instructions}
-
-{get_current_date_instructions}
 
 {get_agency_id_instructions}
 
@@ -116,19 +113,75 @@ Always strive to provide clear, user-friendly answers. If you're unsure about th
     functions=[
         get_documents,  # Use the shared tool
         get_document_details,  # Use the shared tool
-        get_current_date,  # Use the shared tool
         get_agency_id,  # Use the shared tool
         get_pdf_content,  # Use the shared tool
     ]
 )
 
 ##########################################################################################
-# Run the interactive console loop using run_demo_loop provided by SWARM
-#
-# The user can type queries, and the agent will respond.
+# Create chatbot loop
 ##########################################################################################
+def run_chatbot_loop(
+    starting_agent,
+    context_variables=None,
+    stream=False,
+    debug=False,
+    capture_tools_called=False,
+    capture_internal_chatter=False,
+) -> None:
+    
+    # Load the .env file
+    dotenv.load_dotenv()
+
+    # Initialize the Azure OpenAI client
+    aoai_client = AzureOpenAI(
+        api_key=os.getenv("AOAI_KEY"),
+        api_version="2024-10-01-preview",
+        azure_endpoint=os.getenv("AOAI_ENDPOINT")
+    )
+
+    # Initialize the SWARM client
+    swarm_client = Swarm(client=aoai_client)
+
+    print("\nStarting RGA Console Chatbot\n")
+
+    messages = []
+    agent = starting_agent
+
+    while True:
+        user_input = input("\033[90mUser\033[0m: ")
+        messages.append({"role": "user", "content": user_input})
+
+        response = swarm_client.run(
+            agent=agent,
+            messages=messages,
+            stream=stream,
+            debug=debug,
+            capture_tools_called=capture_tools_called,
+            capture_internal_chatter=capture_internal_chatter,
+        )
+
+        if stream:
+            response = process_and_print_streaming_response(response)
+        else:
+            pretty_print_messages(response.messages)
+
+        if capture_tools_called and response.tools_called:
+            print("\n\033[93mTools Called:\033[0m")
+            for tool in response.tools_called:
+                print(f"  - Tool: {tool['tool_name']}, Arguments: {tool['arguments']}")
+
+        if capture_internal_chatter and response.internal_chatter:
+            print("\n\033[96mInternal Chatter:\033[0m")
+            for message in response.internal_chatter:
+                print(f"  - {message}")
+
+        messages.extend(response.messages)
+        agent = response.agent
+
+
 
 if __name__ == "__main__":
     # We run the demo loop. The user can now type queries in the console.
     # The agent can call the functions as needed and respond accordingly.
-    run_demo_loop(agent, stream=True, debug=False, listToolCalls=False)
+    run_chatbot_loop(agent, stream=True, debug=False, capture_tools_called=True, capture_internal_chatter=False)

@@ -142,16 +142,45 @@ def get_documents(
     """
     Tool: `get_documents`
 
-    Searches for documents on Regulations.gov based on the provided criteria. This tool allows filtering by various
-    parameters such as agency, docket, document type, date ranges, and keywords. It retrieves metadata and data
-    about documents, including their titles, IDs, types, and posting dates.
+    Find documents on Regulations.gov based on provided filter such as search term, agency, docket ID, 
+    posted date, and more.
 
-    For detailed information about the input parameters and usage examples,
-    refer to the documentation in `docs/tools/get_documents.md`.
+    It retrieves metadata and data about documents, including their titles, IDs, types, and posting dates.
+
+    It also retrieves aggegated metadata about the full set of documents that match the filters, even 
+    those not returned in the page.
+
+    For detailed information about the input parameters and usage examples, refer to the documentation 
+    in `docs/tools/get_documents.md`.
 
     Returns:
         Any: The JSON response from the API.
     """
+
+    # Convert pageNumber and pageSize to integers
+    try:
+        pageNumber = int(pageNumber)
+        pageSize = int(pageSize)
+    except ValueError:
+        raise ValueError("pageNumber and pageSize must be integers")
+    
+    # Ensure the pageNumber and pageSize are within the allowed range by adjusting them if necessary
+    if pageNumber < 1:
+        pageNumber = 1
+    if pageNumber > 20:
+        pageNumber = 20
+    if pageSize < 5:
+        pageSize = 5
+    elif pageSize > 250:
+        pageSize = 250
+
+
+    # Ensure the sort field is valid (include descending sort)
+    if sort:
+        if sort not in ['documentId', '-documentId', 'title', '-title', 'postedDate', '-postedDate', 'lastModifiedDate', '-lastModifiedDate','commentEndDate', '-commentEndDate']:
+            sort = 'postedDate'
+
+
     return rga_client.get_documents(
         agencyId=agencyId,
         commentEndDate=commentEndDate,
@@ -173,7 +202,7 @@ def get_documents(
     )
 
 ##########################################################################################
-# Tool: get_document_details
+# Tool: get_document_detailsw
 ##########################################################################################
 
 def get_document_details(document_id: str, include_attachments: Optional[bool] = False) -> Any:
