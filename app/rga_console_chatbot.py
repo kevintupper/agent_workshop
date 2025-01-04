@@ -148,36 +148,51 @@ def run_chatbot_loop(
     messages = []
     agent = starting_agent
 
-    while True:
-        user_input = input("\033[90mUser\033[0m: ")
-        messages.append({"role": "user", "content": user_input})
+    try:
+        while True:
+            user_input = input("\033[90mUser\033[0m: ")
+            messages.append({"role": "user", "content": user_input})
 
-        response = swarm_client.run(
-            agent=agent,
-            messages=messages,
-            stream=stream,
-            debug=debug,
-            capture_tools_called=capture_tools_called,
-            capture_internal_chatter=capture_internal_chatter,
-        )
+            # Run the agent
+            response = swarm_client.run(
+                agent=agent,
+                messages=messages,
+                stream=stream,
+                debug=debug,
+                capture_tools_called=capture_tools_called,
+                capture_internal_chatter=capture_internal_chatter,
+            )
 
-        if stream:
-            response = process_and_print_streaming_response(response)
-        else:
-            pretty_print_messages(response.messages)
+            if stream:
+                # Handle streaming response
+                final_response = None
+                for partial_response in response:  # Iterate over the generator
+                    process_and_print_streaming_response(partial_response)
+                    final_response = partial_response  # Keep track of the last response
+            else:
+                # Handle non-streaming response
+                pretty_print_messages(response.messages)
+                final_response = response
 
-        if capture_tools_called and response.tools_called:
-            print("\n\033[93mTools Called:\033[0m")
-            for tool in response.tools_called:
-                print(f"  - Tool: {tool['tool_name']}, Arguments: {tool['arguments']}")
+            # Show tools called and internal chatter if enabled
+            if capture_tools_called and hasattr(final_response, "tools_called"):
+                print("\n\033[93mTools Called:\033[0m")
+                for tool in final_response.tools_called:
+                    print(f"  - Tool: {tool['tool_name']}, Arguments: {tool['arguments']}")
 
-        if capture_internal_chatter and response.internal_chatter:
-            print("\n\033[96mInternal Chatter:\033[0m")
-            for message in response.internal_chatter:
-                print(f"  - {message}")
+            if capture_internal_chatter and hasattr(final_response, "internal_chatter"):
+                print("\n\033[96mInternal Chatter:\033[0m")
+                for message in final_response.internal_chatter:
+                    print(f"  - {message}")
 
-        messages.extend(response.messages)
-        agent = response.agent
+            # Extend messages and update the agent
+            if hasattr(final_response, "messages"):
+                messages.extend(final_response.messages)
+            if hasattr(final_response, "agent"):
+                agent = final_response.agent
+                
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 
 

@@ -2,11 +2,13 @@
 requests
 python-dotenv
 markitdown
+
 # AI 
 openai
 
 # Swarm
 git+https://github.com/kevintupper/swarm_azure.git
+
 # UI 
 streamlit
   

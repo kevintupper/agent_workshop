@@ -49,10 +49,12 @@ class RegulationsGovAPI:
             response (requests.Response): The HTTP response object.
 
         Returns:
-            Any: The JSON data from the response.
+            Any: The JSON data from the response or error details.
 
-        Raises:
-            Exception: If the response contains an HTTP error.
+        Notes:
+            - For HTTP errors (e.g., 404, 500), this method returns a dictionary with error details
+              instead of raising exceptions. This design choice ensures that the calling code can
+              handle errors gracefully without needing to catch exceptions.
         """
         try:
             response.raise_for_status()
@@ -96,9 +98,10 @@ class RegulationsGovAPI:
         """
         Retrieves a list of documents based on the provided filters.
 
-        For detailed information about the input parameters and usage examples,
-        refer to the documentation in `docs/tools/get_documents.md` or the  official
-        Regulations.gov API documentation at https://open.gsa.gov/api/regulationsgov/.
+        For detailed information about the input parameters and usage examples
+        refer to https://open.gsa.gov/api/regulationsgov/.
+
+        The instructions for the documents agent are in the instructions folder.
 
         Returns:
             Any: The JSON response from the API.
@@ -137,6 +140,7 @@ class RegulationsGovAPI:
             params["filter[withinCommentPeriod]"] = str(withinCommentPeriod).lower()
         if sort:
             params["sort"] = sort
+            
         # Add pagination parameters
         params["page[number]"] = pageNumber
         params["page[size]"] = pageSize
@@ -144,8 +148,14 @@ class RegulationsGovAPI:
         logger.info("Fetching documents with parameters: %s", params)
         response = requests.get(url, headers=self.headers, params=params)
 
+
         # Handle the response
-        return self._handle_response(response)
+        try:
+            # Handle the response and return the result
+            return self._handle_response(response)
+        except Exception as e:
+            logger.error("Error handling response: %s", e)
+            raise
 
 
     def get_document_details(
@@ -156,6 +166,11 @@ class RegulationsGovAPI:
         """
         Retrieves detailed information for a specific document.
 
+        For detailed information about the input parameters and usage examples
+        refer to https://open.gsa.gov/api/regulationsgov/.
+
+        The instructions for the documents agent are in the instructions folder.
+
         Args:
             document_id (str): The unique identifier of the document to retrieve.
             include_attachments (Optional[bool]): Whether to include attachments in the response. Defaults to False.
@@ -165,7 +180,6 @@ class RegulationsGovAPI:
 
         Raises:
             ValueError: If the document_id is not provided or is empty.
-            HTTPError: If the API request fails (e.g., 404 for document not found, 403 for invalid API key).
         """
         if not document_id:
             raise ValueError("The 'document_id' parameter is required and cannot be empty.")
@@ -178,13 +192,18 @@ class RegulationsGovAPI:
         if include_attachments:
             params["include"] = "attachments"
 
-        logger.info("Fetching details for document ID: %s with parameters: %s", document_id, params)
+        # Log the request details
+        self._log_request("GET", url, params)
 
         # Make the GET request to the API
         response = requests.get(url, headers=self.headers, params=params)
 
         # Handle the response
-        return self._handle_response(response)
+        try:
+            return self._handle_response(response)
+        except Exception as e:
+            logger.error("Error handling response for document ID %s: %s", document_id, e)
+            raise
 
 
     def get_comments(self, filters: Optional[Dict[str, Any]] = None) -> Any:
@@ -268,4 +287,20 @@ class RegulationsGovAPI:
         logger.info("Fetching agency categories for acronym: %s", acronym)
         response = requests.get(url, headers=self.headers, params=params)
         return self._handle_response(response)
+
+
+    def _log_request(self, method: str, url: str, params: Optional[Dict[str, Any]] = None):
+        """
+        Logs the details of an API request.
+
+        Args:
+            method (str): The HTTP method (e.g., GET, POST).
+            url (str): The request URL.
+            params (Optional[Dict[str, Any]]): The query parameters.
+
+        Notes:
+            - This method is used for debugging and monitoring API requests.
+            - It logs the HTTP method, URL, and query parameters being sent to the API.
+        """
+        logger.info("API Request - Method: %s, URL: %s, Params: %s", method, url, params)
 
