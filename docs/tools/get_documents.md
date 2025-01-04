@@ -47,9 +47,11 @@ The document counts are aggregated by agencyId and by documentType if you need t
 1. Use only the parameters necessary to answer the user's query. Avoid overloading the request with unnecessary filters.
 2. IMPORTANT: If the user is looking for specific metadata that includes aggregates of doctypes and agencies, or they only need a handful of documents use a small `pageSize` (e.g., 5 or 10).
 3. For queries requiring a large number of documents, use a reasonable `pageSize` (e.g., 50 or 100) and handle pagination to aggregate results across multiple pages.
-4. Adhere to the minimum and maximum for pageSize and pageNumber.  NOTE: These are ints.
-4. If the query involves date ranges, use `postedDateGe` and `postedDateLe` to filter documents efficiently.
-5. Sort results by relevant fields (e.g., "-postedDate" for the most recent documents) to prioritize the most useful data for the user.
+4. Adhere to the minimum and maximum for pageSize and pageNumber. NOTE: These are ints.
+5. If the query involves date ranges, use `postedDateGe` and `postedDateLe` to filter documents efficiently.
+6. Sort results by relevant fields (e.g., "-postedDate" for the most recent documents) to prioritize the most useful data for the user.
+7. **Avoid including raw API links in responses**. Instead, summarize the document details in a user-friendly way. If the user needs access to the document, provide clear instructions on how to find it on Regulations.gov (e.g., "Search for the document by its title or ID on Regulations.gov").
+8. If the user asks for specific content within a document, consider using the `get_document_details` and `get_pdf_content` tools to retrieve and summarize the content.
 
 ### Example Usage
 1. **Search for documents with a specific term**:

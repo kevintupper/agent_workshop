@@ -39,7 +39,8 @@ from rga_tools import (
     get_documents,
     get_document_details,
     get_current_date,
-    get_agency_id
+    get_agency_id,
+    get_pdf_content,
 )
 
 
@@ -64,6 +65,9 @@ with open('docs/tools/get_current_date.md', 'r') as file:
 with open('docs/tools/get_agency_id.md', 'r') as file:
     get_agency_id_instructions = file.read()
 
+with open('docs/tools/get_pdf_content.md', 'r') as file:
+    get_pdf_content_instructions = file.read()
+
 
 # Create the agent
 agent = Agent(
@@ -73,9 +77,19 @@ You are a helpful agent that can search and retrieve information from the Regula
 
 ### General Guidelines:
 1. **Primary Focus**: Your main focus is to assist the user with queries related to Regulations.gov. Use the provided tools to retrieve accurate and relevant information.
-2. **Non-Regulations.gov Topics**: IMPORTANT: Decline to particpate in conversations that are not related to Regulations.gov and the type of subjects found on there, i.e., rules/regulations/etc. If the user asks about something completely unrelated, based on  your judgement, respond by saying that you are not able to help with that and that you are primarily focused on discussing content found on Regulations.gov.
+2. **Non-Regulations.gov Topics**: IMPORTANT: Decline to participate in conversations that are not related to Regulations.gov and the type of subjects found on there, i.e., rules/regulations/etc. If the user asks about something completely unrelated, based on your judgment, respond by saying that you are not able to help with that and that you are primarily focused on discussing content found on Regulations.gov.
    - Example: "I apologize, but my expertise is in Regulations.gov and related topics."
 3. **Clarify Ambiguity**: If the user's query is unclear, ask follow-up questions to better understand their intent.
+
+### Handling Document Content:
+1. If the user asks for specific details that are likely contained in a document's content (e.g., names, descriptions, or other specific information), follow these steps:
+   - Use the `get_document_details` tool to retrieve the document metadata and check for any attachments (e.g., a PDF).
+   - If a PDF attachment is available, use the `get_pdf_content` tool to retrieve and process the content.
+   - Extract the relevant information from the PDF content and provide a clear, concise response to the user.
+2. If the document does not have a PDF attachment or the content is not relevant to the user's query, provide the metadata details instead.
+3. **Avoid including raw API links in responses**.
+4. **Avoid responses like this:  You can find more details about this document by searching for its title or Document ID on [Regulations.gov](https://www.regulations.gov).**
+
 
 ### Handling Date Parameters:
 When the user asks for information that requires filtering by date (e.g., "Show me documents from the last 30 days"), follow these steps:
@@ -94,15 +108,17 @@ You have access to the following tools to assist with user queries. Use them as 
 
 {get_agency_id_instructions}
 
+{get_pdf_content_instructions}
+
 Always strive to provide clear, user-friendly answers. If you're unsure about the user's intent, ask for clarification.
 """,
     model="gpt-4o",
-    # model="o1-mini",
     functions=[
         get_documents,  # Use the shared tool
         get_document_details,  # Use the shared tool
         get_current_date,  # Use the shared tool
         get_agency_id,  # Use the shared tool
+        get_pdf_content,  # Use the shared tool
     ]
 )
 
@@ -115,4 +131,4 @@ Always strive to provide clear, user-friendly answers. If you're unsure about th
 if __name__ == "__main__":
     # We run the demo loop. The user can now type queries in the console.
     # The agent can call the functions as needed and respond accordingly.
-    run_demo_loop(agent, stream=True, debug=False, listToolCalls=True)
+    run_demo_loop(agent, stream=True, debug=False, listToolCalls=False)

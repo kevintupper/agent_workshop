@@ -1,6 +1,7 @@
 # Utilities
 requests
 python-dotenv
+markitdown
 
 # AI 
 openai

@@ -119,7 +119,9 @@ class Swarm:
             messages=[], agent=None, context_variables={}
         )
 
+        i = 0
         for tool_call in tool_calls:
+            i += 1
             name = tool_call.function.name
             # Handle missing tool case, skip to next tool
             if name not in function_map:
@@ -150,9 +152,11 @@ class Swarm:
                 continue
 
             # Print tool call and arguments if listToolCalls is enabled
-            if listToolCalls:
-                print(f"\033[95mTool Call:\033[0m {name}({json.dumps(args, indent=2)})")
-            print(f"\033[95mTool Call:\033[0m {name}({json.dumps(args, indent=2)})")
+            print(f"\033[95mTool Call:\033[0m {name}({args})")
+
+            # Add line break after last tool call
+            if i == len(tool_calls):
+                print(f"\n")
 
             debug_print(debug, f"Processing tool call: {name} with arguments {args}")
 
@@ -175,6 +179,7 @@ class Swarm:
             if result.agent:
                 partial_response.agent = result.agent
 
+        #print(f"\n")
         return partial_response
 
     def run_and_stream(
@@ -222,7 +227,7 @@ class Swarm:
 
             yield {"delim": "start"}
             for chunk in completion:
-                delta = json.loads(chunk.choices[0].delta.json())
+                delta = json.loads(chunk.choices[0].delta.model_dump_json())
                 if delta["role"] == "assistant":
                     delta["sender"] = active_agent.name
                 yield delta

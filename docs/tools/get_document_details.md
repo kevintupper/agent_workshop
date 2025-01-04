@@ -34,12 +34,14 @@
 34| 2. Always provide a valid `documentId` to retrieve the document details.
 35| 3. If attachments are needed, set `includeAttachments` to `true`. Note that attachments are not included by default.
 36| 4. Ensure the `documentId` is valid and corresponds to an existing document on Regulations.gov.
-37| 
-38| ### Example Usage
-39| 1. **Retrieve details for a specific document**:
-40|    - Input: `documentId="EPA-HQ-OAR-2003-0129-0001"`
-41|    - Output: Detailed information about the document with ID `EPA-HQ-OAR-2003-0129-0001`.
-42| 
-43| 2. **Retrieve details for a document with attachments**:
-44|    - Input: `documentId="EPA-HQ-OAR-2003-0129-0001", includeAttachments=true`
-45|    - Output: Detailed information about the document, including its attachments.
+37| 5. If the document includes a PDF attachment and the user's query suggests they are looking for specific content within the document, consider using the `get_pdf_content` tool to retrieve and process the PDF content automatically.
+38| 6. If the user prompt would benefit from the actual content of the document in the PDF, consider using the `get_pdf_content` tool in conjunction with this tool.
+39| 
+40| ### Example Usage
+41| 1. **Retrieve details for a specific document**:
+42|    - Input: `documentId="EPA-HQ-OAR-2003-0129-0001"`
+43|    - Output: Detailed information about the document with ID `EPA-HQ-OAR-2003-0129-0001`.
+44| 
+45| 2. **Retrieve details for a document with attachments**:
+46|    - Input: `documentId="EPA-HQ-OAR-2003-0129-0001", includeAttachments=true`
+47|    - Output: Detailed information about the document, including its attachments.

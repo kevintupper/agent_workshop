@@ -46,6 +46,9 @@ from typing import Optional, Any
 from rga_client_instance import rga_client  # Import the shared rga_client instance
 import datetime
 import json
+import requests
+from markitdown import MarkItDown
+import os
 
 ##########################################################################################
 # Helper tools
@@ -68,6 +71,45 @@ def get_agency_id():
     with open('data/agency.json', 'r') as file:
         agency_list = json.load(file)
     return agency_list
+
+
+def get_pdf_content(pdf_url: str) -> str:
+    """
+    Retrieves the content of a PDF file from a given URL, converts it to Markdown using the MarkItDown library,
+    and returns the Markdown content.
+
+    Args:
+        pdf_url (str): The URL of the PDF file to be converted.
+
+    Returns:
+        str: The Markdown content of the PDF file.
+    """
+    # Step 1: Download the PDF file from the provided URL
+    response = requests.get(pdf_url)
+    if response.status_code != 200:
+        raise Exception(f"Failed to download PDF from {pdf_url}. Status code: {response.status_code}")
+
+    # Save the PDF temporarily
+    temp_pdf_path = "temp_downloaded_file.pdf"
+    with open(temp_pdf_path, "wb") as pdf_file:
+        pdf_file.write(response.content)
+
+    # Step 2: Convert the PDF to Markdown using MarkItDown
+    try:
+        md = MarkItDown()
+        result = md.convert(temp_pdf_path)
+        markdown_content = result.text_content
+    except Exception as e:
+        raise Exception(f"Failed to convert PDF to Markdown: {str(e)}")
+    finally:
+        # Clean up the temporary file
+        if os.path.exists(temp_pdf_path):
+            os.remove(temp_pdf_path)
+
+    # Step 3: Return the Markdown content
+    return markdown_content
+
+
 
 
 ##########################################################################################
