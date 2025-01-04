@@ -26,7 +26,7 @@ from datetime import datetime
 from swarm import Agent
     
 # App imports
-from app.tools import (
+from tools import (
     get_agency_id,
     get_pdf_content,
     transfer_to_documents, 
@@ -35,7 +35,7 @@ from app.tools import (
     transfer_back_to_triage
 )
 
-from app.rga_tools import(
+from rga_tools import(
     get_documents,
     get_document_details,
 
