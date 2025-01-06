@@ -270,24 +270,7 @@ class RegulationsGovAPI:
         logger.info("Fetching details for docket ID: %s", docket_id)
         response = requests.get(url, headers=self.headers)
         return self._handle_response(response)
-
-
-    def get_agency_categories(self, acronym: str) -> Any:
-        """
-        Retrieves a list of agency categories filtered by the provided acronym.
-
-        Args:
-            acronym (str): The agency acronym to filter categories (e.g., 'EPA').
-
-        Returns:
-            Any: The JSON response from the API.
-        """
-        url = f"{self.base_url}/agency-categories"
-        params = {"filter[acronym]": acronym}
-        logger.info("Fetching agency categories for acronym: %s", acronym)
-        response = requests.get(url, headers=self.headers, params=params)
-        return self._handle_response(response)
-
+    
 
     def _log_request(self, method: str, url: str, params: Optional[Dict[str, Any]] = None):
         """

@@ -1,0 +1,25 @@
+# Notes / documentation about the get_documents_detail API call from regulations.gov
+
+
+GET
+/documents/{documentId}
+Get detailed information for specified documentId
+
+Gets the detailed information of a specific document with the passed documentId.
+
+Parameters
+Name	Description
+documentId *
+string
+(path)
+ID of document to return
+
+documentId
+include
+string
+(query)
+resources to include
+
+Example : attachments
+
+attachments

@@ -105,7 +105,7 @@ documents_agent = Agent(
     name="Documents Agent",
     instructions=DOCUMENTS_AGENT_INSTRUCTIONS,
     model=default_agent_model,
-    functions=[get_documents, get_document_details, get_agency_id,get_pdf_content, transfer_back_to_triage]
+    functions=[get_documents, get_document_details, get_agency_id, get_pdf_content, transfer_back_to_triage]
 )
 
 ##########################################################################################

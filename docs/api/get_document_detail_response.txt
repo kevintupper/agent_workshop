@@ -1,0 +1,260 @@
+# Notes / documentation about the response data whene calling get_documents_detail API call from regulations.gov
+
+
+DocumentDetail{
+address1	string
+nullable: true
+The first line of the submitter's address.
+
+address2	string
+nullable: true
+The second line of the submitter's address.
+
+agencyId	[...]
+city	string
+nullable: true
+The city associated with the submitter's address. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+category	string
+nullable: true
+An agency-specific category allowing agencies to group comments according to their type.
+
+comment	string
+The comment text associated with the comment submission. This field is always returned in JSON response.
+
+country	string
+nullable: true
+The country associated with the submitter's address. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+docAbstract	string
+The detailed description of the document. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+docketId	string
+The ID of the docket to which the document corresponds. This field is always returned in JSON response.
+
+documentType	DocumentTypestring
+type of document. This field is always returned in JSON response
+
+Enum:
+[ Notice, Rule, Proposed Rule, Supporting & Related Material, Other ]
+email	string
+nullable: true
+The submitter's e-mail address.
+
+fax	string
+nullable: true
+The submitter's fax number.
+
+field1	string
+nullable: true
+An agency-specific field used for storing additional data with the document. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+field2	string
+nullable: true
+An agency-specific field used for storing additional data with the document. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+fileFormats	[
+list of file formats
+
+FileFormat{
+fileUrl	string
+URL of the file on S3
+
+format	string
+The format of the file such as pdf
+
+size	integer
+The file size
+
+}]
+firstName	string
+nullable: true
+The submitter's first name. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+govAgency	string
+nullable: true
+The name of the government agency that the submitter represents. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+govAgencyType	string
+nullable: true
+The type of government agency that the submitter represents. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+lastName	string
+nullable: true
+The submitter's last name. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+legacyId	string
+nullable: true
+An agency-specific identifier that was given to the document in the legacy system. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+modifyDate	string($date-time)
+The date when the document was last modified.
+
+The date is formatted as ISO 8601 with an offset such as 2019-01-20T13:15:45Z.
+
+objectId	string
+The internal ID of the document in our system.
+
+openForComment	boolean
+Conveys if a document is open for comment.
+
+organization	string
+nullable: true
+The organization that the submitter represents. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+originalDocumentId	string
+The document ID that was assigned when first entered into the system should a change occur that requires a new document ID to be assigned.
+
+pageCount	string
+nullable: true
+Conveys the number of pages contained in the document. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+phone	string
+nullable: true
+The submitter's phone number.
+
+postedDate	string($date-time)
+The date that the document was posted by the agency to the system.
+
+The date is formatted as ISO 8601 with an offset such as 2019-01-20T13:15:45Z. This field is always returned in JSON response.
+
+postmarkDate	string($date-time)
+nullable: true
+The postmark date of a document that was sent by mail.
+
+The date is formatted as ISO 8601 with an offset such as 2019-01-20T13:15:45Z. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+reasonWithdrawn	string
+nullable: true
+If the document is withdrawn, this field will state the reason. If data exists, it is always returned in JSON response.
+
+receiveDate	string($date-time)
+The date that the document was received by the agency to the system.
+
+The date is formatted as ISO 8601 with an offset such as 2018-06-29T04:00:00Z. This field is always returned in JSON response.
+
+restrictReason	string
+If the document is restricted, this field will state the reason. If data exists, it is always returned in JSON response.
+
+restrictReasonType	string
+If the document is restricted, this field will state the type of restriction. If data exists, it is always returned in JSON response.
+
+stateProvinceRegion	string
+nullable: true
+The submitter's state,province or region. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+subtype	string
+nullable: true
+An agency-specific attribute to further categorize a document beyond the documentType. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+title	string
+The formal title of the document. This field is always returned in JSON response.
+
+trackingNbr	string
+The tracking number of the submission. This field is always returned in JSON response.
+
+withdrawn	boolean
+Conveys if the document is withdrawn. This field is always returned in JSON response.
+
+zip	string
+The zip associated with the submitter's address. This is an agency configurable field. An agency can configure this field to make it not publicly accessible.
+
+additionalRins	[
+nullable: true
+One or more Regulatory Information Numbers (RINs) to which the document relates.
+
+[...]]
+allowLateComments	boolean
+Indicates whether the owning agency will accept comments on the document after the due date.
+
+authorDate	string($date-time)
+nullable: true
+The date that the authors wrote or published the document.
+
+The date is formatted as ISO 8601 with an offset such as 2019-01-20T13:15:45Z.
+
+authors	[
+nullable: true
+The individual, organization, or group of collaborators that contributed to the creation of the document.
+
+[...]]
+cfrPart	string
+nullable: true
+The Code of Federal Regulations (CFR) Citation applicable to the document.
+
+commentEndDate	string($date-time)
+nullable: true
+The date that closes the period when public comments may be submitted on the document.
+
+The date is formatted as ISO 8601 with an offset such as 2019-01-20T13:15:45Z.
+
+commentStartDate	string($date-time)
+nullable: true
+The date that begins the period when public comments may be submitted on the document.
+
+The date is formatted as ISO 8601 with an offset such as 2019-01-20T13:15:45Z.
+
+effectiveDate	string($date-time)
+nullable: true
+The date the document is put into effect.
+
+The date is formatted as ISO 8601 with an offset such as 2019-01-20T13:15:45Z.
+
+exhibitLocation	string
+nullable: true
+The physical location of an exhibit to which a document refers.
+
+exhibitType	string
+nullable: true
+The type of exhibit to which a document refers.
+
+frDocNum	string
+nullable: true
+The unique identifier of a document originating in the Federal Register.
+
+frVolNum	string
+nullable: true
+The Federal Register volume number where the document was published.
+
+implementationDate	string($date-time)
+nullable: true
+The date the document is to be implemented.
+
+The date is formatted as ISO 8601 with an offset such as 2019-01-20T13:15:45Z.
+
+media	string
+nullable: true
+The media in which the document is stored.
+
+ombApproval	string
+nullable: true
+The control number assigned when approval is given by the Office of Management and Budget (OMB) in accordance with the Paperwork Reduction Act (PRA).
+
+paperLength	integer
+When the document is in paper format, indicates the length of the paper.
+
+paperWidth	integer
+When the document is in paper format, indicates the width of the paper.
+
+regWriterInstruction	string
+nullable: true
+Additional instructions provided by the writer of the regulation.
+
+sourceCitation	string
+nullable: true
+The citation for the source that published the document.
+
+startEndPage	string
+nullable: true
+The starting and ending pages where the document was published.
+
+subject	string
+nullable: true
+The subject of the document.
+
+topics	[
+nullable: true
+The principal topics to which the document pertains.
+
+string]
+}

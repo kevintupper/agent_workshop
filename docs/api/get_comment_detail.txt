@@ -1,0 +1,25 @@
+# Notes / documentation about the get_comments_detail API call from regulations.gov
+
+
+GET
+/comments/{commentId}
+Get detailed information for specified commentId
+
+Gets the detailed information of a specific comment with the passed commentId.
+
+Parameters
+Name	Description
+commentId *
+string
+(path)
+ID of comment to return
+
+commentId
+include
+string
+(query)
+resources to include
+
+Example : attachments
+
+attachments

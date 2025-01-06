@@ -79,33 +79,39 @@ def is_user_authenticated():
         return True
 
     # 2. Check if we have ?code= from MSAL redirect
-    query_params = st.experimental_get_query_params()
+    query_params = st.query_params.to_dict()
     if "code" in query_params:
-        code_value = query_params["code"][0]
-        # Exchange code for token
-        token = service.exchange_code_for_token(code_value)
-        st.experimental_set_query_params()  # Clear the code param from the URL
-        if token:
-            # Check tenant
-            tid = service.get_tenant_id_from_token(token)
-            if tid and service.is_allowed_tenant(tid):
-                # Grab user info from Graph
-                info = service.get_user_info(token)
-                if info:
-                    st.session_state["ACCESS_TOKEN"] = token
-                    st.session_state["USER_INFO"] = info
-                    return True
-                else:
-                    st.error("Failed to retrieve user profile from Graph.")
-            else:
-                st.error("Tenant not allowed or not found in token.")
-        else:
-            st.error("Code exchange failed for unknown reasons.")
-        return False
+        auth_code = query_params["code"][0]
+
+        # Get the access token
+        access_token = service.acquire_token_by_auth_code_flow(auth_code)
+        st.query_params.clear()
+
+        # Check if we got an access token
+        if not access_token:
+            st.error("Authentication failed.")
+            return False
+
+        # Check the tenant ID and make sure it is in the list of allowed tenants
+        tenant_id = service.get_tenant_id_from_token(access_token)
+        if not service.is_allowed_tenant(tenant_id):
+            display_invalid_tenant_screen(service)
+            return False
+
+        # Get the user's information
+        user_info = service.get_user_info(access_token)
+        if not user_info:
+            st.error("Failed to retrieve user information.")
+            return False
+
+        # Store the token and user info in session state
+        st.session_state["ACCESS_TOKEN"] = access_token
+        st.session_state["USER_INFO"] = user_info
+        return True
 
     # 3. If we have no token and no code => prompt sign-in
     st.info("Please sign in with your Azure AD account.")
-    sign_in_url = service.build_auth_url()
+    sign_in_url = service.initiate_auth_code_flow()
     st.markdown(f"[Click here to Sign In]({sign_in_url})")
     return False
 
@@ -237,6 +243,28 @@ def display_debug_info():
             st.write(f"- {message}")
     else:
         st.write("No internal chatter yet.")
+
+def display_invalid_tenant_screen(auth_service: AuthService) -> None:
+    """
+    Display a screen for users who have logged in with an invalid tenant.
+    """
+    st.title("Access Denied")
+    st.error("Your account is not authorized to access this application.")
+    st.write("This application is only available to specific Microsoft tenants.")
+    st.write("If you believe this is an error, please contact your administrator.")
+    
+    st.write("You can try signing in with a different account:")
+    auth_url = auth_service.build_auth_url()
+    st.markdown(
+        f"""
+        <a href='{auth_url}' target='_self'>
+            <button style='background-color: teal; color: white; border: none; border-radius: 4px; padding: 8px 16px; font-size: 18px; cursor: pointer;'>
+                Sign In with a Different Account
+            </button>
+        </a>
+        """,
+        unsafe_allow_html=True
+    )
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,113 @@
+# Notes / documentation about the get_documents API call from regulations.gov
+
+
+GET
+/documents
+List of documents
+
+This endpoint returns list of documents
+
+Parameters
+Name	Description
+filter[agencyId]
+string
+(query)
+'Filters results for the agency acronym specified in the value. Example: ''EPA'''
+
+filter[agencyId]
+filter[commentEndDate]
+string($date)
+(query)
+Filters results relative to the comment end date. The value must be formatted as yyyy-MM-dd.
+
+Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used.
+ge - greater than or equal
+le - less than or equal
+
+filter[commentEndDate]
+filter[docketId]
+string
+(query)
+Filters results on the specified docket ID.
+
+filter[docketId]
+filter[documentType]
+string
+(query)
+Filters results on the specified document type.
+
+Available values : Notice, Rule, Proposed Rule, Supporting & Related Material, Other
+
+
+--
+filter[frDocNum]
+string
+(query)
+Filters results on the specified frDocNum.
+
+filter[frDocNum]
+filter[searchTerm]
+string
+(query)
+Filters results on the given term.
+
+filter[searchTerm]
+filter[postedDate]
+string($date)
+(query)
+Filters results relative to the posted date. The value must be formatted as yyyy-MM-dd.
+
+Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used.
+ge - greater than or equal
+le - less than or equal
+
+filter[postedDate]
+filter[lastModifiedDate]
+string($date)
+(query)
+Filters results relative to the last modified date. The value must be formatted as yyyy-MM-dd HH:mm:ss.
+
+Omission of a parameter modifier will match results to the exact date provided, otherwise, one of the parameter modifiers below may be used.
+ge - greater than or equal
+le - less than or equal
+
+filter[lastModifiedDate]
+filter[subtype]
+string
+(query)
+Filters results on the supplied document subtype
+
+filter[subtype]
+filter[withinCommentPeriod]
+boolean
+(query)
+Filters results for documents that are open for comment by setting the value to true.
+
+False is not an acceptable value for this parameter, hence it should be removed when not being used.
+
+
+--
+sort
+string
+(query)
+Sorts the results on the field specified in the value. The default behavior will sort the results in ascending order; to sort in descending order, prepend a minus sign to the value.
+
+Supported values are commentEndDate, postedDate, lastModifiedDate, documentId and title. Multiple sort options can be passed in as a comma separated list to sort results by multiple fields.
+
+sort
+page[number]
+integer
+(query)
+Specifies the number for the page of results that will be returned from the query.
+
+Acceptable values are numerical between, and including, 1 and 20.
+
+page[number]
+page[size]
+integer
+(query)
+Specifies the size per page of results that will be returned from the query.
+
+Acceptable values are numerical between, and including, 5 and 250.
+
+page[size]
