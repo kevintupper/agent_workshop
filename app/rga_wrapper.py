@@ -328,21 +328,65 @@ class RegulationsGovAPI:
             raise
 
 
-    def get_dockets(self, filters: Optional[Dict[str, Any]] = None) -> Any:
+    def get_dockets(
+        self,
+        agency_id: Optional[str] = None,
+        search_term: Optional[str] = None,
+        last_modified_date_ge: Optional[str] = None,
+        last_modified_date_le: Optional[str] = None,
+        sort: Optional[str] = None,
+        page_number: Optional[int] = None,
+        page_size: Optional[int] = None,
+    ) -> Any:
         """
         Retrieves a list of dockets based on the provided filters.
 
         Args:
-            filters (Optional[Dict[str, Any]]): A dictionary of query parameters for filtering the results.
+            agency_id (Optional[str]): Filters results for the agency acronym (e.g., "EPA").
+            search_term (Optional[str]): Filters results based on the given search term.
+            last_modified_date_ge (Optional[str]): Filters results with last modified date >= this value.
+            last_modified_date_le (Optional[str]): Filters results with last modified date <= this value.
+            sort (Optional[str]): Sorts the results by fields like "title", "docketId", or "lastModifiedDate".
+            page_number (Optional[int]): Specifies the page number of results to return (1-20).
+            page_size (Optional[int]): Specifies the number of results per page (5-250).
 
         Returns:
             Any: The JSON response from the API.
+
+        Raises:
+            ValueError: If invalid parameters are provided.
         """
         url = f"{self.base_url}/dockets"
-        params = filters if filters else {}
-        logger.info("Fetching dockets with filters: %s", params)
+        params = {}
+
+        # Map arguments to API parameters
+        if agency_id:
+            params["filter[agencyId]"] = agency_id
+        if search_term:
+            params["filter[searchTerm]"] = search_term
+        if last_modified_date_ge:
+            params["filter[lastModifiedDate][ge]"] = last_modified_date_ge
+        if last_modified_date_le:
+            params["filter[lastModifiedDate][le]"] = last_modified_date_le
+        if sort:
+            params["sort"] = sort
+        if page_number:
+            params["page[number]"] = page_number
+        if page_size:
+            params["page[size]"] = page_size
+
+        # Log the request details
+        self._log_request("GET", url, params)
+
+        # Make the GET request to the API
         response = requests.get(url, headers=self.headers, params=params)
-        return self._handle_response(response)
+
+        # Handle the response
+        try:
+            return self._handle_response(response)
+        except Exception as e:
+            logger.error("Error handling response for dockets: %s", e)
+            raise
 
 
     def get_docket_details(self, docket_id: str) -> Any:
@@ -354,11 +398,28 @@ class RegulationsGovAPI:
 
         Returns:
             Any: The JSON response from the API.
+
+        Raises:
+            ValueError: If the docket_id is not provided or is empty.
         """
+        if not docket_id:
+            raise ValueError("The 'docket_id' parameter is required and cannot be empty.")
+
+        # Construct the URL for the docket details endpoint
         url = f"{self.base_url}/dockets/{docket_id}"
-        logger.info("Fetching details for docket ID: %s", docket_id)
+
+        # Log the request details
+        self._log_request("GET", url)
+
+        # Make the GET request to the API
         response = requests.get(url, headers=self.headers)
-        return self._handle_response(response)
+
+        # Handle the response
+        try:
+            return self._handle_response(response)
+        except Exception as e:
+            logger.error("Error handling response for docket ID %s: %s", docket_id, e)
+            raise
     
 
     def _log_request(self, method: str, url: str, params: Optional[Dict[str, Any]] = None):

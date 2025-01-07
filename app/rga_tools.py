@@ -251,3 +251,80 @@ def get_comment_details(
         comment_id=comment_id,
         include_attachments=include_attachments,
     )
+
+##########################################################################################
+# Tool: get_dockets
+##########################################################################################
+
+def get_dockets(
+    agencyId: Optional[str] = None,
+    searchTerm: Optional[str] = None,
+    lastModifiedDateGe: Optional[str] = None,
+    lastModifiedDateLe: Optional[str] = None,
+    sort: Optional[str] = None,
+    pageNumber: Optional[int] = 1,
+    pageSize: Optional[int] = 5,
+) -> Any:
+    """
+    Tool: `get_dockets`
+
+    Retrieves a list of dockets from Regulations.gov based on provided filters such as agency ID,
+    search term, last modified date, and more.
+
+    For detailed information about the input parameters and usage examples, refer to the documentation
+    in `docs/tools/get_dockets.md`.
+
+    Returns:
+        Any: The JSON response from the API.
+    """
+    # Convert pageNumber and pageSize to integers
+    try:
+        pageNumber = int(pageNumber)
+        pageSize = int(pageSize)
+    except ValueError:
+        raise ValueError("pageNumber and pageSize must be integers")
+
+    # Ensure the pageNumber and pageSize are within the allowed range
+    if pageNumber < 1:
+        pageNumber = 1
+    if pageSize < 5:
+        pageSize = 5
+    elif pageSize > 250:
+        pageSize = 250
+
+    # Ensure the sort field is valid
+    if sort:
+        if sort not in ['docketId', '-docketId', 'title', '-title', 'lastModifiedDate', '-lastModifiedDate']:
+            sort = '-lastModifiedDate'
+
+    return rga_client.get_dockets(
+        agency_id=agencyId,
+        search_term=searchTerm,
+        last_modified_date_ge=lastModifiedDateGe,
+        last_modified_date_le=lastModifiedDateLe,
+        sort=sort,
+        page_number=pageNumber,
+        page_size=pageSize,
+    )
+
+
+##########################################################################################
+# Tool: get_docket_details
+##########################################################################################
+
+def get_docket_details(docket_id: str) -> Any:
+    """
+    Tool: `get_docket_details`
+
+    Retrieves detailed information for a specific docket.
+
+    For detailed information about the input parameters and usage examples,
+    refer to the documentation in `docs/tools/get_docket_details.md`.
+
+    Returns:
+        Any: The JSON response from the API.
+    """
+    if not docket_id:
+        raise ValueError("The 'docket_id' parameter is required and cannot be empty.")
+
+    return rga_client.get_docket_details(docket_id)

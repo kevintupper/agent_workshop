@@ -1,0 +1,16 @@
+# Notes / documentation about the get_docket_detail API call from regulations.gov
+
+GET
+/dockets/{docketId}
+Get detailed information for specified docketId
+
+Gets the detailed information of a specific docket with the passed docketId.
+
+Parameters
+Name	Description
+docketId *
+string
+(path)
+ID of docket to return
+
+docketId

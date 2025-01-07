@@ -1,0 +1,73 @@
+# Notes / documentation about the response document from the get_dockets API call from regulations.gov
+
+
+
+
+DocketFindAllResponse{
+description:	
+A JSON:API document with a list of resources
+
+data	[
+uniqueItems: true
+The list of dockets where each docket is a JSON:API document
+
+DocketFindAllItem{
+description:	
+A JSON:API document which represents a single document in the list
+
+id	string
+The JSON:API resource ID docketId
+
+type	string
+The JSON:API resource type dockets
+
+attributes	Docket{
+agencyId	string
+The acronym used to abbreviate the name of the agency associated with the docket.
+
+docketType	DocketTypestring
+the type of docket
+
+Enum:
+[ Rulemaking, Nonrulemaking ]
+highlightedContent	string
+nullable: true
+Content highlighted by search engine for the searchTerm. Only returned for searches with searchTerm.
+
+lastModifiedDate	string($date-time)
+The date docket was last modified in the system.
+
+The date is formatted as ISO 8601 with an offset such as 2019-01-20T13:15:45Z.
+
+objectId	string
+The internal ID of the docket in our system.
+
+title	string
+The formal title of the docket.
+
+}
+links	[SelfLink{
+description:	
+Link to self
+
+self	Linkstring($uri-reference)
+uniqueItems: true
+A string containing the link URL.
+
+}]
+}]
+meta	FindAllResponseMetadata{
+description:	
+A JSON:API document
+
+hasNextPage	boolean
+hasPreviousPage	boolean
+numberOfElements	integer
+pageNumber	integer
+pageSize	integer
+totalElements	integer
+totalPages	integer
+firstPage	boolean
+lastPage	boolean
+}
+}

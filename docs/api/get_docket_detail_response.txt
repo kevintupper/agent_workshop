@@ -1,0 +1,85 @@
+# Notes / documentation about the response document from the get_docket_detail API call from regulations.gov
+
+DocketDetail{
+agencyId	string
+The acronym used to abbreviate the name of the agency associated with the docket.
+
+category	string
+nullable: true
+Agency specific docket category providing regulatory action details, status, and the agency program and or office.
+
+dkAbstract	string
+The detailed description of the docket.
+
+docketType	DocketTypestring
+the type of docket
+
+Enum:
+[ Rulemaking, Nonrulemaking ]
+effectiveDate	string($date-time)
+The date the docket is put into effect.
+
+The date is formatted as ISO 8601 with an offset such as 2019-01-20T13:15:45Z.
+
+field1	string
+nullable: true
+An agency-specific field used for storing additional data with the docket.
+
+field2	string
+nullable: true
+An agency-specific field used for storing additional data with the docket.
+
+generic	string
+nullable: true
+An agency-specific field used for storing additional data with the docket.
+
+keywords	[
+nullable: true
+string
+Agency selected keywords associated with a docket to improve its searchability by the public.
+
+]
+legacyId	string
+nullable: true
+An agency-specific identifier that was given to the docket in the legacy system.
+
+modifyDate	string($date-time)
+The date when the docket was last modified.
+
+The date is formatted as ISO 8601 with an offset such as 2019-01-20T13:15:45Z.
+
+objectId	string
+The internal ID of the document in our system.
+
+organization	string
+nullable: true
+Identifies docket's (a regulatory action) orginating agency and/or department.
+
+petitionNbr	string
+nullable: true
+Agency specific identifier associated with a docket.
+
+program	string
+nullable: true
+The agency specific program associated with the docket.
+
+rin	string
+nullable: true
+OMB issued Regulation Identifier Number (RIN) uniquely identifies a docket and its documents.
+
+shortTitle	string
+nullable: true
+A combination of letters and or numbers assigned to an agency's regulatory action for purposes of brevity.
+
+subType	string
+nullable: true
+This agency specific attribute characterizes a docket (regulatory action) beyond its assigned docket type, e.g., Rulemaking.
+
+subType2	string
+nullable: true
+This agency specific attribute characterizes a docket (regulatory action) beyond the designated docket subtype.
+
+title	string
+A name or descriptive heading given to an agency's docket.
+
+}

@@ -40,6 +40,8 @@ from rga_tools import(
     get_document_details,
     get_comments,
     get_comment_details,
+    get_dockets,
+    get_docket_details,
 )
 
 # Default model for all agents
@@ -134,7 +136,7 @@ DOCKETS_AGENT_INSTRUCTIONS = load_instructions("dockets_agent_instructions.md", 
 dockets_agent = Agent(
     name="Dockets Agent",
     instructions=DOCKETS_AGENT_INSTRUCTIONS,
-    functions=[]  # Add docket-related tools here when implemented
+    functions=[get_dockets, get_docket_details, get_agency_id, get_pdf_content, transfer_back_to_triage]
 )
 
 
