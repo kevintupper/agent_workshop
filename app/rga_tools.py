@@ -137,7 +137,7 @@ def get_documents(
     )
 
 ##########################################################################################
-# Tool: get_document_detailsw
+# Tool: get_document_details
 ##########################################################################################
 
 def get_document_details(document_id: str, include_attachments: Optional[bool] = True) -> Any:
@@ -151,3 +151,103 @@ def get_document_details(document_id: str, include_attachments: Optional[bool] =
         Any: The JSON response from the API.
     """
     return rga_client.get_document_details(document_id, include_attachments)
+
+##########################################################################################
+# Tool: get_comments
+#
+# This tool wraps the `get_comments` method from the `RegulationsGovAPI` class.
+# It takes user-provided filters as input, calls the API, and returns the full JSON
+# response from the API.
+##########################################################################################
+
+def get_comments(
+    agencyId: Optional[str] = None,
+    searchTerm: Optional[str] = None,
+    postedDate: Optional[str] = None,
+    postedDateGe: Optional[str] = None,
+    postedDateLe: Optional[str] = None,
+    lastModifiedDate: Optional[str] = None,
+    lastModifiedDateGe: Optional[str] = None,
+    lastModifiedDateLe: Optional[str] = None,
+    commentOnId: Optional[str] = None,
+    sort: Optional[str] = None,
+    pageNumber: Optional[int] = 1,
+    pageSize: Optional[int] = 5,
+) -> Any:
+    """
+    Tool: `get_comments`
+
+    Retrieves a list of comments from Regulations.gov based on provided filters such as agency ID,
+    search term, posted date, and more.
+
+    For detailed information about the input parameters and usage examples, refer to the documentation
+    in `docs/tools/get_comments.md`.
+
+    Returns:
+        Any: The JSON response from the API.
+    """
+    # Convert pageNumber and pageSize to integers
+    try:
+        pageNumber = int(pageNumber)
+        pageSize = int(pageSize)
+    except ValueError:
+        raise ValueError("pageNumber and pageSize must be integers")
+
+    # Ensure the pageNumber and pageSize are within the allowed range
+    if pageNumber < 1:
+        pageNumber = 1
+    if pageSize < 5:
+        pageSize = 5
+    elif pageSize > 250:
+        pageSize = 250
+
+    # Ensure the sort field is valid
+    if sort:
+        if sort not in ['postedDate', '-postedDate', 'lastModifiedDate', '-lastModifiedDate']:
+            sort = '-postedDate'
+
+    return rga_client.get_comments(
+        agencyId=agencyId,
+        searchTerm=searchTerm,
+        postedDate=postedDate,
+        postedDateGe=postedDateGe,
+        postedDateLe=postedDateLe,
+        lastModifiedDate=lastModifiedDate,
+        lastModifiedDateGe=lastModifiedDateGe,
+        lastModifiedDateLe=lastModifiedDateLe,
+        commentOnId=commentOnId,
+        sort=sort,
+        pageNumber=pageNumber,
+        pageSize=pageSize,
+    )
+
+
+##########################################################################################
+# Tool: get_comment_details
+#
+# This tool wraps the `get_comment_details` method from the `RegulationsGovAPI` class.
+# It retrieves detailed information for a specific comment.
+##########################################################################################
+
+def get_comment_details(
+    comment_id: str,
+    include_attachments: Optional[bool] = False,
+) -> Any:
+    """
+    Tool: `get_comment_details`
+
+    Retrieves detailed information for a specific comment from Regulations.gov.
+
+    For detailed information about the input parameters and usage examples, refer to the documentation
+    in `docs/tools/get_comment_details.md`.
+
+    Returns:
+        Any: The JSON response from the API.
+    """
+    if not comment_id:
+        raise ValueError("The 'comment_id' parameter is required and cannot be empty.")
+
+    return rga_client.get_comment_details(
+        comment_id=comment_id,
+        include_attachments=include_attachments,
+    )

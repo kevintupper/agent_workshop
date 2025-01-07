@@ -161,7 +161,7 @@ class RegulationsGovAPI:
     def get_document_details(
         self,
         document_id: str,
-        include_attachments: Optional[bool] = False,
+        include_attachments: Optional[bool] = True,
     ) -> Any:
         """
         Retrieves detailed information for a specific document.
@@ -206,37 +206,126 @@ class RegulationsGovAPI:
             raise
 
 
-    def get_comments(self, filters: Optional[Dict[str, Any]] = None) -> Any:
+    def get_comments(
+        self,
+        agencyId: Optional[str] = None,
+        searchTerm: Optional[str] = None,
+        postedDate: Optional[str] = None,
+        postedDateGe: Optional[str] = None,
+        postedDateLe: Optional[str] = None,
+        lastModifiedDate: Optional[str] = None,
+        lastModifiedDateGe: Optional[str] = None,
+        lastModifiedDateLe: Optional[str] = None,
+        commentOnId: Optional[str] = None,
+        sort: Optional[str] = None,
+        pageNumber: Optional[int] = 1,
+        pageSize: Optional[int] = 5,
+    ) -> Any:
         """
         Retrieves a list of comments based on the provided filters.
 
         Args:
-            filters (Optional[Dict[str, Any]]): A dictionary of query parameters for filtering the results.
+            agencyId (Optional[str]): Filters results for the agency acronym.
+            searchTerm (Optional[str]): Filters results on the given term.
+            postedDate (Optional[str]): Filters results relative to the posted date.
+            postedDateGe (Optional[str]): Filters results with posted date >= this value.
+            postedDateLe (Optional[str]): Filters results with posted date <= this value.
+            lastModifiedDate (Optional[str]): Filters results relative to the last modified date.
+            lastModifiedDateGe (Optional[str]): Filters results with last modified date >= this value.
+            lastModifiedDateLe (Optional[str]): Filters results with last modified date <= this value.
+            commentOnId (Optional[str]): Filters results on the supplied commentOnId.
+            sort (Optional[str]): Sorts the results by the specified field.
+            pageNumber (Optional[int]): Specifies the page number of results to return.
+            pageSize (Optional[int]): Specifies the size of results per page.
 
         Returns:
             Any: The JSON response from the API.
         """
+        # Construct the URL for the comments endpoint
         url = f"{self.base_url}/comments"
-        params = filters if filters else {}
-        logger.info("Fetching comments with filters: %s", params)
+
+        # Query parameters
+        params = {}
+        if agencyId:
+            params["filter[agencyId]"] = agencyId
+        if searchTerm:
+            params["filter[searchTerm]"] = searchTerm
+        if postedDate:
+            params["filter[postedDate]"] = postedDate
+        if postedDateGe:
+            params["filter[postedDate][ge]"] = postedDateGe
+        if postedDateLe:
+            params["filter[postedDate][le]"] = postedDateLe
+        if lastModifiedDate:
+            params["filter[lastModifiedDate]"] = lastModifiedDate
+        if lastModifiedDateGe:
+            params["filter[lastModifiedDate][ge]"] = lastModifiedDateGe
+        if lastModifiedDateLe:
+            params["filter[lastModifiedDate][le]"] = lastModifiedDateLe
+        if commentOnId:
+            params["filter[commentOnId]"] = commentOnId
+        if sort:
+            params["sort"] = sort
+        if pageNumber:
+            params["page[number]"] = pageNumber
+        if pageSize:
+            params["page[size]"] = pageSize
+
+        # Log the request details
+        self._log_request("GET", url, params)
+
+        # Make the GET request to the API
         response = requests.get(url, headers=self.headers, params=params)
-        return self._handle_response(response)
+
+        # Handle the response
+        try:
+            return self._handle_response(response)
+        except Exception as e:
+            logger.error("Error handling response for comments: %s", e)
+            raise
     
 
-    def get_comment_details(self, comment_id: str) -> Any:
+    def get_comment_details(
+        self,
+        comment_id: str,
+        include_attachments: Optional[bool] = True,
+    ) -> Any:
         """
         Retrieves detailed information for a specific comment.
 
         Args:
             comment_id (str): The ID of the comment to retrieve.
+            include_attachments (Optional[bool]): Whether to include attachments in the response. Defaults to False.
 
         Returns:
             Any: The JSON response from the API.
+
+        Raises:
+            ValueError: If the comment_id is not provided or is empty.
         """
+        if not comment_id:
+            raise ValueError("The 'comment_id' parameter is required and cannot be empty.")
+
+        # Construct the URL for the comment details endpoint
         url = f"{self.base_url}/comments/{comment_id}"
-        logger.info("Fetching details for comment ID: %s", comment_id)
-        response = requests.get(url, headers=self.headers)
-        return self._handle_response(response)
+
+        # Query parameters
+        params = {}
+        if include_attachments:
+            params["include"] = "attachments"
+
+        # Log the request details
+        self._log_request("GET", url, params)
+
+        # Make the GET request to the API
+        response = requests.get(url, headers=self.headers, params=params)
+
+        # Handle the response
+        try:
+            return self._handle_response(response)
+        except Exception as e:
+            logger.error("Error handling response for comment ID %s: %s", comment_id, e)
+            raise
 
 
     def get_dockets(self, filters: Optional[Dict[str, Any]] = None) -> Any:

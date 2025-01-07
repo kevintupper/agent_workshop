@@ -1,0 +1,79 @@
+# Notes / documentation about the response document from the get_comments API call from regulations.gov
+
+
+CommentFindAllResponse{
+description:	
+A JSON:API document with a list of resources
+
+data	[
+uniqueItems: true
+The list of comments where each comment is a JSON:API document
+
+CommentFindAllItem{
+description:	
+A JSON:API document which represents a single document in the list
+
+id	string
+The JSON:API resource ID documentId
+
+type	string
+The JSON:API resource type comments
+
+attributes	Comment{
+agencyId	string
+The acronym used to abbreviate the name of the agency associated with the document.
+
+documentType	DocumentTypestring
+type of document. This field is always returned in JSON response
+
+Enum:
+[ Notice, Rule, Proposed Rule, Supporting & Related Material, Other ]
+highlightedContent	string
+nullable: true
+Content highlighted by search engine for the searchTerm. Only returned for searches with searchTerm.
+
+lastModifiedDate	string($date-time)
+The date comment was last modified in the system.
+
+The date is formatted as ISO 8601 with an offset such as 2019-01-20T13:15:45Z.
+
+objectId	string
+The internal ID of the comment in our system.
+
+postedDate	string
+The date that the document was posted by the agency to the system.
+
+The date is formatted as ISO 8601 with an offset such as 2019-01-20T13:15:45Z.
+
+title	string
+The formal title of the document.
+
+withdrawn	boolean
+Conveys if the document is withdrawn
+
+}
+links	[SelfLink{
+description:	
+Link to self
+
+self	Linkstring($uri-reference)
+uniqueItems: true
+A string containing the link URL.
+
+}]
+}]
+meta	FindAllResponseMetadata{
+description:	
+A JSON:API document
+
+hasNextPage	boolean
+hasPreviousPage	boolean
+numberOfElements	integer
+pageNumber	integer
+pageSize	integer
+totalElements	integer
+totalPages	integer
+firstPage	boolean
+lastPage	boolean
+}
+}

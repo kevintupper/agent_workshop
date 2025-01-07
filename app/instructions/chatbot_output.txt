@@ -1,0 +1,79 @@
+PS /Users/kevintupper/source/agent_workshop> python app/chatbot.py
+
+Starting RGA Console Chatbot
+
+User: What was the most recent comment?
+Triage Agent: transfer_to_comments()
+Comments Agent: get_comments()
+Comments Agent: The most recent comment is titled "Comment from Griffin, Georgia." It was posted on January 6, 2025, and is associated with the agency NOAA (National Oceanic and Atmospheric Administration). If you need more details or wish to view the comment, let me know!
+
+Tools Called:
+  - Tool: transfer_to_comments, Arguments: {}
+  - Tool: get_comments, Arguments: {"sort":"-postedDate","pageSize":"1"}
+Starting agent: Comments Agent
+User: What was their comment about?
+Comments Agent: get_comment_details()
+Comments Agent: Georgia Griffin's comment is in support of listing all 10 proposed giant clam species under the Endangered Species Act. She argues that this listing will help these species recover from various threats, such as international trade and climate change. Overharvesting for shells and poaching, which undermines protective efforts by many countries, are highlighted as significant threats.
+
+She also advocates for prohibiting the trade of giant clam parts and products to reduce demand. Furthermore, Georgia Griffin emphasizes the importance of protecting giant clams to improve water quality and benefit coral reefs, which are also in decline. She describes giant clams as a biological wonder and a crucial part of coral reef ecosystems, urging quick action on their Endangered Species Act listings and identifying critical habitats for further protection.
+
+Tools Called:
+  - Tool: get_comment_details, Arguments: {"comment_id":"NOAA-NMFS-2017-0029-21608"}
+Starting agent: Comments Agent
+User: Can you show me the comment?
+Comments Agent: The comment submitted by Georgia Griffin is as follows:
+
+---
+
+I support listing all 10 proposed giant clam species under the Endangered Species Act, which will give them a chance to recover from existential threats like international trade and climate change.
+
+Overharvesting for shells is a serious threat, and poaching undermines many countries' efforts to protect giant clams. I support prohibiting trade of derivative parts and products of other giant clams that are similar in appearance to reduce demand.
+
+With coral reefs on the decline, giant clams are losing their habitat. Young clams may have a harder time finding suitable places to settle as a result. Giving giant clams Endangered Species Act protection will improve water quality and spur research that benefits giant clams and the coral reefs where they live.
+
+These fast-growing, long-living clams are a biological wonder and an integral part of coral reef ecosystems. I urge you to quickly finalize their Endangered Species Act listings *and* work to identify critical habitat areas to further support and protect them.
+
+Sincerely,  
+Georgia Griffin  
+MI 48051-1950
+
+--- 
+
+If you need more information or have other questions, feel free to ask!
+Starting agent: Comments Agent
+User: Examine teh docment contents that this comment is commenting on.  Then tell me if it's relevant.
+Comments Agent: get_document_details()
+Comments Agent: transfer_back_to_triage()
+Triage Agent: transfer_to_documents()
+Documents Agent: get_document_details()
+Documents Agent: get_pdf_content()
+Documents Agent: The document titled "Endangered and Threatened Species: Proposed Listing Determinations for Ten Species of Giant Clams under the Endangered Species Act" presents a proposed rule by the National Marine Fisheries Service (NMFS) to list several giant clam species as endangered or threatened due to their extinction risk or similarity of appearance to other listed species. The key points of the document include:
+
+1. **Proposed Listings**:
+   - *Endangered*: Hippopus porcellanus, Tridacna derasa, Tridacna gigas, Tridacna mbalavuana, and Tridacna squamosina.
+   - *Threatened*: Hippopus hippopus (due to risk of extinction) and Tridacna crocea, Tridacna maxima, Tridacna noae, Tridacna squamosa (due to similarity of appearance).
+
+2. **Major Threats**:
+   - Overutilization for commercial, recreational, scientific, or educational purposes.
+   - Inadequate regulatory mechanisms to control harvest and trade.
+   - Environmental threats such as ocean warming and acidification, pollution, and habitat destruction.
+
+3. **Proposed Protections**:
+   - Standard ESA protections against import, export, take, and commercial trafficking for endangered species.
+   - For the threatened species listed due to similarity of appearance, import and export of parts and products that cannot be visually distinguished from those of listed species are specifically restricted.
+
+4. **Rationale for Listing and Management**:
+   - Highlighting the difficulty in visually distinguishing between listed and unlisted species, which undermines enforcement and conservation efforts if not addressed.
+   - Encouraging the use of mariculture as both a conservation strategy and to mitigate demand on wild populations, albeit with limited success thus far.
+
+Given the document's focus on listing determinations based on observed threats and similarity in appearance enforcement challenges, Georgia Griffin’s comment supporting the listing of giant clams under the Endangered Species Act is indeed relevant. It aligns with the document’s acknowledgment of overharvesting and poaching as critical threats to these species and highlights the need for regulatory measures to protect these clams from extinction.
+
+Tools Called:
+  - Tool: get_document_details, Arguments: {"document_id":"NOAA-NMFS-2017-0029-0027"}
+  - Tool: transfer_back_to_triage, Arguments: {}
+  - Tool: transfer_to_documents, Arguments: {}
+  - Tool: get_document_details, Arguments: {"document_id":"NOAA-NMFS-2017-0029-0027","include_attachments":true}
+  - Tool: get_pdf_content, Arguments: {"pdf_url":"https://downloads.regulations.gov/NOAA-NMFS-2017-0029-0027/content.pdf"}
+  
+Starting agent: Documents Agent
+User: 

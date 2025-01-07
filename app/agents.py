@@ -38,7 +38,8 @@ from tools import (
 from rga_tools import(
     get_documents,
     get_document_details,
-
+    get_comments,
+    get_comment_details,
 )
 
 # Default model for all agents
@@ -119,7 +120,7 @@ COMMENTS_AGENT_INSTRUCTIONS = load_instructions("comments_agent_instructions.md"
 comments_agent = Agent(
     name="Comments Agent",
     instructions=COMMENTS_AGENT_INSTRUCTIONS,
-    functions=[]  # Add comment-related tools here when implemented
+    functions=[get_comments, get_comment_details, get_agency_id, get_pdf_content, transfer_back_to_triage]
 )
 
 ##########################################################################################
