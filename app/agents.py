@@ -65,7 +65,7 @@ def load_instructions(file_name: str, **kwargs) -> str:
     """
     instructions_dir = os.path.join(os.path.dirname(__file__), "instructions")
     file_path = os.path.join(instructions_dir, file_name)
-    with open(file_path, "r") as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         instructions = file.read()
 
     # Perform placeholder substitution
