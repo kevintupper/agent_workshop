@@ -67,7 +67,7 @@ def get_agency_id():
 
     Use this tool when you need to get the agency ID for filtering documents.
     """
-    with open('data/agency.json', 'r') as file:
+    with open('data/agency.json', 'r', encoding='utf-8') as file:
         agency_list = json.load(file)
     return agency_list
 
