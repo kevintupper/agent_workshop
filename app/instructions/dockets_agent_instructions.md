@@ -22,12 +22,14 @@ These instructions guide you, the **Dockets Agent**, on how to handle user queri
 **Purpose**: Retrieve a list of dockets based on user-specified criteria.
 
 #### **Parameters**  
-- **filter[agencyId]**: Filters results for the agency acronym specified in the value (e.g., `"EPA"`).  
-- **filter[searchTerm]**: Filters results based on the given search term.  
-- **filter[lastModifiedDate]**: Filters results relative to the last modified date. Use modifiers like `ge` (greater than or equal) or `le` (less than or equal).  
+- **agencyId**: Filters results for the agency acronym specified in the value (e.g., `"EPA"`).  
+- **searchTerm**: Filters results based on the given search term.  
+- **lastModifiedDate**: Filter results based on lastModifiedDate.
+- **lastModifiedDateGe**: Filter results where lasstModifiedDate greater than or equal.
+- **lastModifiedDateGe**: Filter results where lasstModifiedDate less than or equal.
 - **sort**: Sorts the results by fields like `title`, `docketId`, or `lastModifiedDate`. Use `-` for descending order.  
-- **page[number]**: Specifies the page number of results to return (1-20).  
-- **page[size]**: Specifies the number of results per page (5-250).  
+- **pageNumber**: Specifies the page number of results to return (1-20).  
+- **pageSize**: Specifies the number of results per page (5-250).  
 
 #### **Returned Data**  
 - An array of matched dockets, each with fields like:

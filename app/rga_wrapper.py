@@ -330,25 +330,27 @@ class RegulationsGovAPI:
 
     def get_dockets(
         self,
-        agency_id: Optional[str] = None,
-        search_term: Optional[str] = None,
-        last_modified_date_ge: Optional[str] = None,
-        last_modified_date_le: Optional[str] = None,
+        agencyId: Optional[str] = None,
+        searchTerm: Optional[str] = None,
+        lastModifiedDate: Optional[str] = None,
+        lastModifiedDateGe: Optional[str] = None,
+        lastModifiedDateLe: Optional[str] = None,
         sort: Optional[str] = None,
-        page_number: Optional[int] = None,
-        page_size: Optional[int] = None,
+        pageNumber: Optional[int] = None,
+        pageSize: Optional[int] = None,
     ) -> Any:
         """
         Retrieves a list of dockets based on the provided filters.
 
         Args:
-            agency_id (Optional[str]): Filters results for the agency acronym (e.g., "EPA").
-            search_term (Optional[str]): Filters results based on the given search term.
-            last_modified_date_ge (Optional[str]): Filters results with last modified date >= this value.
-            last_modified_date_le (Optional[str]): Filters results with last modified date <= this value.
+            agencyId (Optional[str]): Filters results for the agency acronym (e.g., "EPA").
+            searchTerm (Optional[str]): Filters results based on the given search term.
+            lastModifiedDate (Optional[str]): Filters results relative to the last modified date.
+            lastModifiedDateGe (Optional[str]): Filters results with last modified date >= this value.
+            lastModifiedDateLe (Optional[str]): Filters results with last modified date <= this value.
             sort (Optional[str]): Sorts the results by fields like "title", "docketId", or "lastModifiedDate".
-            page_number (Optional[int]): Specifies the page number of results to return (1-20).
-            page_size (Optional[int]): Specifies the number of results per page (5-250).
+            pageNumber (Optional[int]): Specifies the page number of results to return (1-20).
+            pageSize (Optional[int]): Specifies the number of results per page (5-250).
 
         Returns:
             Any: The JSON response from the API.
@@ -360,20 +362,22 @@ class RegulationsGovAPI:
         params = {}
 
         # Map arguments to API parameters
-        if agency_id:
-            params["filter[agencyId]"] = agency_id
-        if search_term:
-            params["filter[searchTerm]"] = search_term
-        if last_modified_date_ge:
-            params["filter[lastModifiedDate][ge]"] = last_modified_date_ge
-        if last_modified_date_le:
-            params["filter[lastModifiedDate][le]"] = last_modified_date_le
+        if agencyId:
+            params["filter[agencyId]"] = agencyId
+        if searchTerm:
+            params["filter[searchTerm]"] = searchTerm
+        if lastModifiedDate:
+            params["filter[lastModifiedDate]"] = lastModifiedDate
+        if lastModifiedDateGe:
+            params["filter[lastModifiedDate][ge]"] = lastModifiedDateGe
+        if lastModifiedDateLe:
+            params["filter[lastModifiedDate][le]"] = lastModifiedDateLe
         if sort:
             params["sort"] = sort
-        if page_number:
-            params["page[number]"] = page_number
-        if page_size:
-            params["page[size]"] = page_size
+        if pageNumber:
+            params["page[number]"] = pageNumber
+        if pageSize:
+            params["page[size]"] = pageSize
 
         # Log the request details
         self._log_request("GET", url, params)

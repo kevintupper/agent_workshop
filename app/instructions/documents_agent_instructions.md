@@ -32,7 +32,9 @@ These instructions guide you, the **Documents Agent**, on how to handle user que
 - **postedDate**: Filter results for an exact posted date.  
 - **postedDateGe**: “Posted date greater than or equal to.”  
 - **postedDateLe**: “Posted date less than or equal to.”  
-- **lastModifiedDate**, **lastModifiedDateGe**, **lastModifiedDateLe**: Filter by last modified date.  
+- **lastModifiedDate**: Filter results based on lastModifiedDate.
+- **lastModifiedDateGe**: Filter results where lastModifiedDate greater than or equal.
+- **lastModifiedDateGe**: Filter results where lasstModifiedDate less than or equal.
 - **subtype**: Agency-specific subcategory beyond `documentType`.  
 - **withinCommentPeriod**: `True` if the user only wants documents that are still open for comment.  
 - **sort**: Sorting rules. Examples:  

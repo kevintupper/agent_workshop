@@ -259,6 +259,7 @@ def get_comment_details(
 def get_dockets(
     agencyId: Optional[str] = None,
     searchTerm: Optional[str] = None,
+    lastModifiedDate: Optional[str] = None,
     lastModifiedDateGe: Optional[str] = None,
     lastModifiedDateLe: Optional[str] = None,
     sort: Optional[str] = None,
@@ -298,13 +299,14 @@ def get_dockets(
             sort = '-lastModifiedDate'
 
     return rga_client.get_dockets(
-        agency_id=agencyId,
-        search_term=searchTerm,
-        last_modified_date_ge=lastModifiedDateGe,
-        last_modified_date_le=lastModifiedDateLe,
+        agencyId=agencyId,
+        searchTerm=searchTerm,
+        lastModifiedDate=lastModifiedDate,
+        lastModifiedDateGe=lastModifiedDateGe,
+        lastModifiedDateLe=lastModifiedDateLe,
         sort=sort,
-        page_number=pageNumber,
-        page_size=pageSize,
+        pageNumber=pageNumber,
+        pageSize=pageSize,
     )
 
 
@@ -312,7 +314,7 @@ def get_dockets(
 # Tool: get_docket_details
 ##########################################################################################
 
-def get_docket_details(docket_id: str) -> Any:
+def get_docket_details(docketId: str) -> Any:
     """
     Tool: `get_docket_details`
 
@@ -324,7 +326,7 @@ def get_docket_details(docket_id: str) -> Any:
     Returns:
         Any: The JSON response from the API.
     """
-    if not docket_id:
-        raise ValueError("The 'docket_id' parameter is required and cannot be empty.")
+    if not docketId:
+        raise ValueError("The 'docketId' parameter is required and cannot be empty.")
 
-    return rga_client.get_docket_details(docket_id)
+    return rga_client.get_docket_details(docketId)
