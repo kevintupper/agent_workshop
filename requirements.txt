@@ -4,6 +4,10 @@ python-dotenv
 markitdown
 pyjwt
 
+# Notebook
+IPython
+ipykernel
+
 
 # AI 
 openai
@@ -14,5 +18,3 @@ git+https://github.com/kevintupper/swarm_azure.git
 # UI 
 streamlit
   
-# Security
-msal
