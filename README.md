@@ -51,14 +51,24 @@ In this workshop, you will:
    git clone https://github.com/YourUsername/agent_workshop.git
    cd agent_workshop
    ```
-2. **Create & activate** a virtual environment (recommended):
+
+2. **Clone the Swarm Framework**:
+    As part of this workshop, we will also be working with the [Swarm framework](https://github.com/kevintupper/swarm_azure). You are encouraged to fork the repository and clone your own version to allow for customization of the agentic code:
+    ```bash
+    git clone https://github.com/YourUsername/swarm_azure.git
+    cd swarm_azure
+    ```
+
+    After cloning, you can make adjustments to the Swarm framework as needed for your agents.
+
+3. **Create & activate** a virtual environment (recommended):
    ```bash
    python -m venv venv
    source venv/bin/activate  # On macOS/Linux
    # or
    venv\Scripts\activate  # On Windows
    ```
-3. **Install** Python dependencies:
+4. **Install** Python dependencies:
    ```bash
    pip install -r requirements.txt
    ```
@@ -114,31 +124,41 @@ Open the provided link (usually `http://localhost:8501`) in your browser and cha
 ## Repository Structure
 
 ```
-agent_workshop/
-├─ app/
-│   ├─ agents.py               # All agent definitions
-│   ├─ tools_integration_testing.ipynb
-│   ├─ triage_agent_instructions.md
-│   ├─ documents_agent_instructions.md
-│   ├─ comments_agent_instructions.md
-│   ├─ dockets_agent_instructions.md
-│   ├─ ...
-│   └─ chatbot.py              # Main console chatbot entry point
-├─ swarm_azure/
-│   ├─ swarm/
-│   │   ├─ core.py             # Swarm orchestration logic
-│   │   ├─ repl/...
-│   │   ├─ ...
-├─ data/
-│   └─ agency.json             # Agency IDs for lookup
-├─ docs/
-│   ├─ api/                    # Official API documentation references
-│   ├─ tools/                  # Tool usage docs
-│   └─ ...
-├─ requirements.txt
-├─ .env_sample
-├─ README.md                   # This file
-└─ LICENSE
+/agent_workshop
+├── app
+│   ├── instructions
+│   │   ├── dockets_agent_instructions.md
+│   │   ├── triage_agent_instructions.md
+│   │   ├── documents_agent_instructions.md
+│   │   └── comments_agent_instructions.md
+│   ├── rga_tools.py
+│   ├── streamlit_chatbot.py
+│   ├── tools_integration_testing.ipynb
+│   ├── rga_types.py
+│   ├── tools.py
+│   ├── __init__.py
+│   ├── agents.py
+│   ├── rga_client_instance.py
+│   ├── chatbot.py
+│   └── rga_wrapper.py
+├── LICENSE
+├── requirements.txt
+├── workshop_schedule.md
+├── docs
+│   ├── tools
+│   │   ├── get_documents.md
+│   │   ├── get_pdf_content.md
+│   │   ├── get_document_details.md
+│   │   └── get_agency_id.md
+│   └── api
+│       ├── rga_openapi.yaml
+│       ├── rga_examples.txt
+│       ├── get_xxx.txt - copy/paste of regulations.gov docs
+├── README.md
+├── agent_patterns.jpeg
+├── .env_sample
+└── data
+    └── agency.json
 ```
 
 ---
