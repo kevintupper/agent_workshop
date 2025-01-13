@@ -142,8 +142,9 @@ Open the provided link (usually `http://localhost:8501`) in your browser and cha
 │   ├── chatbot.py
 │   └── rga_wrapper.py
 ├── LICENSE
+├── guide_participants.md
+├── guide_coaches.md
 ├── requirements.txt
-├── workshop_schedule.md
 ├── docs
 │   ├── tools
 │   │   ├── get_documents.md
