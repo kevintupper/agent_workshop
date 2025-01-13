@@ -2,6 +2,9 @@
 
 Welcome to the **Agent Workshop** repository! This project demonstrates how to build a **multi-agent chatbot** that interacts with the [Regulations.gov v4 API](https://open.gsa.gov/api/regulationsgov/) to handle data for **dockets**, **documents**, and **comments**. The chatbot uses the [Swarm framework](https://github.com/kevintupper/swarm_azure) to orchestrate specialized agents, each equipped with the proper tools for querying and retrieving data.
 
+**Important note:** This is a teaching example only to show how agents work. It is based on an experimental/educational agent framework from OpenAI. No effort has been made to make pilot ready. This should not be used as the foundation for a pilot project. It is for a workshop on AI Agents only.
+
+
 ---
 
 ## Table of Contents
